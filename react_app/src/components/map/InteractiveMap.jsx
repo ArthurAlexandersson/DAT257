@@ -11,8 +11,8 @@ const InteractiveMap = () => {
 
   return (
     <GoogleMap
-      zoom={10}
-      center={{ lat: 44, lng: -80 }}
+      zoom={12}
+      center={{ lat: 57.9, lng: 12.5 }}
       mapContainerClassName="map_container"
     ></GoogleMap>
   );
