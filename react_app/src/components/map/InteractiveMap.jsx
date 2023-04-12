@@ -31,7 +31,7 @@ const InteractiveMap = () => {
         const label = document.getElementById("label").value;
         const priority = document.getElementById("priority").value;
 
-        if (lat < -90 || lat > 90 || lng < -180 || lng > 180 || priority < 1 || priority > 100) {
+        if (lat < -85 || lat > 85 || lng < -180 || lng > 180 || priority < 1 || priority > 100) {
             setErrorMessage("Invalid input. Please check the entered values.");
             return;
         }
@@ -44,7 +44,7 @@ const InteractiveMap = () => {
         <>
             <div className="add_marker_form" style={{ top: "1", left: "1" }}>
                 <label>
-                    Latitude (-90 to 90):
+                    Latitude (-85 to 85):
                     <input type="number" id="latitude" min="-90" max="90" step="any" />
                 </label>
                 <label>
