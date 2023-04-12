@@ -2,7 +2,22 @@ import React, { useMemo } from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 
-const InteractiveMap = () => {
+const InteractiveMap = ({ eventData }) => {
+  const fireMarkers = eventData.map((event) => {
+    if (event.categories[0].title === "Wildfires") {
+      return (
+        <MarkerF
+          position={{
+            lat: event.geometries[0].coordinates[1],
+            lng: event.geometries[0].coordinates[0],
+          }}
+          label={"Eld"}
+        ></MarkerF>
+      );
+    }
+    return null;
+  });
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
@@ -13,10 +28,11 @@ const InteractiveMap = () => {
     []
   );
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <div></div>;
   return (
     <GoogleMap zoom={12} center={center} mapContainerClassName="map_container">
       <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
+      {fireMarkers}
     </GoogleMap>
   );
 };
