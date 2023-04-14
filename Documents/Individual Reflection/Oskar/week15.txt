@@ -1,0 +1,6 @@
+## Oscar Karbin Week 15##
+
+This week I spent most of the time setting up the IDE that will be used in this project. This is important 
+because it is the foundation of the project. I also participated in meetings where we discussed different
+APIs we are planning to use. However I did miss the meeting on Monday because of unstable internet while
+traveling. This required me to ask for a summary of the missed meeting.
