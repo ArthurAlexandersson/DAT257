@@ -1,0 +1,13 @@
+##Week 15##
+Arthur Alexandersson
+
+Veckan har fungerat bra, arbetet i gruppen har fungerat bra och vi har kommit igång med att arbeta agilt.
+Jag tycker även att planerandet av veckans Sprint fungerade bra, jag samt de andra gruppmedlemmarna kom med
+bra förslag till våra User Stories. 
+
+Denna vecka har jag främst använt för att bekanta mig med JavaScript då jag i princip är helt ny till 
+det språket. Detta är något jag vill och kommer arbeta vidare med kommande veckor. Jag vill även lära mig
+mer om att arbeta med APIer då det också är helt nytt för mig. 
+
+Inför nästa vecka förväntar jag mig att ha mer kunskap om JavaScript och React för att jobba vidare och 
+utveckla hemsidan vidare. 
