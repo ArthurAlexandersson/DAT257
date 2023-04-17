@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
-import MapEvent from "../MapEvent"
+import MapEvent from "../mapEvent/MapEvent";
 
 const InteractiveMap = ({ eventData }) => {
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -47,7 +47,6 @@ const InteractiveMap = ({ eventData }) => {
     );
 
     if (!isLoaded) return <div></div>;
-
     return (
         <GoogleMap zoom={12} center={center} mapContainerClassName="map_container">
             <MarkerF position={hermansHus} label={"Hermans Hus! :D"} />
