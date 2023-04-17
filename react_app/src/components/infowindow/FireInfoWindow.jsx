@@ -2,25 +2,30 @@ import { useState } from "react";
 import "./fireInfoWindow.css";
 
 const FireInfoWindow = ({ event, onClose }) => {
-    const [isOpen, setIsOpen] = useState(true);
     const lat = event.geometries[0].coordinates[1];
     const lng = event.geometries[0].coordinates[0];
     const title = event.title;
-    const firedate = event.geometries[0].date;
+    const fire_date = event.geometries[0].date;
     const handleClose = () => {
-        setIsOpen(false);
         onClose();
     };
-
     return (
-        <div className={`info_div ${isOpen ? "open" : "closed"}`}>
-            <h1>{title}</h1>
-            <button className="close-button" onClick={handleClose}>
-                X
-            </button>
+        <div className="info-container">
+            <button className="close-button" onClick={handleClose}> > </button>
             <div className="info-content">
-                <p>{`lat: ${lat}, long: ${lng}`}</p>
-                <p>{`Date: ${firedate}`}</p>
+                <div className="info-title">
+                    {title}
+                </div>
+                <div className="info-coordinates">
+                    Coordinates:
+                    <br/>
+                    {`${lat}, ${lng}`}
+                </div>
+
+                <div className="info-date">
+
+                    {`Date: ${fire_date}`}
+                </div>
             </div>
         </div>
     );

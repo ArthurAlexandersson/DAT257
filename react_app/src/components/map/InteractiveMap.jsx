@@ -1,13 +1,18 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
 
 const InteractiveMap = ({ eventData }) => {
-    const [selectedEvent, setSelectedEvent] = React.useState(null);
+    const [selectedEvent, setSelectedEvent] = useState(null);
 
     const handleMarkerClick = (event) => {
-        setSelectedEvent(event);
+        if(selectedEvent === event) {
+            setSelectedEvent(null)
+        }
+        else {
+            setSelectedEvent(event);
+        }
     };
 
     const handleInfoClose = () => {

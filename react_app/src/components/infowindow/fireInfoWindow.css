@@ -1,9 +1,37 @@
-.info_div {
-    width: 50%;
-    height: 50vh;
+.info-container {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    display: flex;
+    width: 25%;
+    height: 100vh;
     background-color: white;
     position: absolute;
+    right: 0;
     border: black;
     border-radius: 3px;
-
+}
+.close-button {
+    height: 100vh;
+    width: 5%;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+.close-button:hover {
+    background-color: gray;
+    border: 2px solid gray;
+}
+.info-title {
+    font-size: 25px;
+    font-style: oblique;
+    padding: 10px;
+}
+.info-coordinates {
+    padding: 20px;
+}
+.info-date {
+    padding: 20px;
 }
