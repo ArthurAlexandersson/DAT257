@@ -1,0 +1,9 @@
+.info_div {
+    width: 50%;
+    height: 50vh;
+    background-color: white;
+    position: absolute;
+    border: black;
+    border-radius: 3px;
+
+}
