@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import InteractiveMap from "./components/map/InteractiveMap";
 import MapLoader from "./components/loader/MapLoader";
+import Header from "./components/header/Header";
 
 function App() {
   const [eventData, setEventData] = useState([]);
@@ -22,8 +23,11 @@ function App() {
 
   return (
     <div className="App">
+      <Header/>
       {!loadingData ? <InteractiveMap eventData={eventData} /> : <MapLoader />}
+      
     </div>
+     
   );
 }
 
