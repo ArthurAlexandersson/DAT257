@@ -8,12 +8,7 @@ const InteractiveMap = ({ eventData }) => {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
     const handleMarkerClick = (event) => {
-        if(selectedEvent === event) {
-            setSelectedEvent(null)
-        }
-        else {
-            setSelectedEvent(event);
-        }
+        setSelectedEvent(event)
     };
 
     const handleInfoClose = () => {
