@@ -1,18 +1,18 @@
 import React, { useMemo } from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import MapEvent from "../mapEvent/MapEvent";
 
 const InteractiveMap = ({ eventData }) => {
   const fireMarkers = eventData.map((event) => {
     if (event.categories[0].title === "Wildfires") {
       return (
-        <MarkerF
-          position={{
-            lat: event.geometries[0].coordinates[1],
-            lng: event.geometries[0].coordinates[0],
-          }}
+        <MapEvent
+          lat={event.geometries[0].coordinates[1]}
+          lng={event.geometries[0].coordinates[0]}
+          radius={5000}
           label={"Eld"}
-        ></MarkerF>
+        ></MapEvent>
       );
     }
     return null;
