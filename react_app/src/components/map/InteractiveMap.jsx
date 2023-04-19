@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
+import MapEvent from "../MapEvent"
 
 const InteractiveMap = ({ eventData }) => {
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -22,15 +23,14 @@ const InteractiveMap = ({ eventData }) => {
     const fireMarkers = eventData.map((event) => {
         if (event.categories[0].title === "Wildfires") {
             return (
-                <MarkerF
-                    key={event.id}
-                    position={{
-                        lat: event.geometries[0].coordinates[1],
-                        lng: event.geometries[0].coordinates[0],
-                    }}
-                    onClick={() => handleMarkerClick(event)}
-                    label={"eld"}
-                />
+                <MapEvent
+                    lat={event.geometries[0].coordinates[1]}
+                    lng={event.geometries[0].coordinates[0]}
+                    radius={5000}
+                    label={"Eld"}
+                    openInfo={handleMarkerClick}
+                    event={event}
+                ></MapEvent>
             );
         }
         return null;
