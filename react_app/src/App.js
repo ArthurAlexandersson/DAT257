@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import InteractiveMap from "./components/map/InteractiveMap";
 import MapLoader from "./components/loader/MapLoader";
+import fireData from "./fireValues/output.json";
 
 function App() {
   const [eventData, setEventData] = useState([]);
@@ -10,10 +11,13 @@ function App() {
   useEffect(() => {
     const fetchEvents = async () => {
       setLoadingData(true);
+      /*
       const res = await fetch("https://eonet.gsfc.nasa.gov/api/v2.1/events");
       const { events } = await res.json();
+      */
 
-      setEventData(events);
+      /* setEventData(events); */
+      setEventData(fireData);
       setLoadingData(false);
     };
 
