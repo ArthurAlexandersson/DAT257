@@ -10,12 +10,12 @@ const mapOptions = {
 
 const InteractiveMap = ({ eventData }) => {
   const slicedArray = eventData.slice(0, 1000);
-  const fireMarkers = slicedArray.map(([latitude, longitude, frp]) => {
+  const fireMarkers = slicedArray.map((event) => {
     return (
       <MapEvent
-        lat={parseFloat(latitude)}
-        lng={parseFloat(longitude)}
-        radius={parseFloat(frp * 10)}
+        lat={parseFloat(event.latitude)}
+        lng={parseFloat(event.longitude)}
+        radius={parseFloat(event.frp * 10)}
         label={"Eld"}
       ></MapEvent>
     );
