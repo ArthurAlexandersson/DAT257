@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
+const google = window.google;
+
 
 const MapEvent = ({ lat, lng, radius, label }) => {
   const [clicked, setClicked] = useState(false);
@@ -19,6 +21,10 @@ const MapEvent = ({ lat, lng, radius, label }) => {
       label={label}
       onClick={() => {
         setClicked(!clicked);
+      }}
+      icon={{
+          url: (require("./fire.svg").default),
+          scaledSize: new google.maps.Size(30,30)
       }}
     ></MarkerF>
   );

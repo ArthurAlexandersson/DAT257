@@ -11,7 +11,7 @@ const InteractiveMap = ({ eventData }) => {
           lat={event.geometries[0].coordinates[1]}
           lng={event.geometries[0].coordinates[0]}
           radius={5000}
-          label={"Eld"}
+          label={"led"}
         ></MapEvent>
       );
     }
