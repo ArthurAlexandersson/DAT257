@@ -2,7 +2,7 @@
     display: -webkit-flex;
     -webkit-flex-direction: row;
     display: flex;
-    width: 25%;
+    width: 20%;
     height: 100vh;
     background-color: white;
     position: absolute;
@@ -29,9 +29,28 @@
     font-style: oblique;
     padding: 10px;
 }
+
 .info-coordinates {
     padding: 20px;
+    font-style: italic;
 }
-.info-date {
+.coordinates {
+    font-weight: bold;
+    font-style: normal;
+    display: inline;
+}
+.info {
     padding: 20px;
+}
+.date {
+    font-weight: bold;
+    display: inline;
+}
+.brightness {
+    font-weight: bold;
+    display: inline;
+}
+.frp {
+    font-weight: bold;
+    display: inline;
 }
