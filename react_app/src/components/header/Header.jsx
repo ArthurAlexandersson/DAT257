@@ -1,12 +1,15 @@
 import * as React from "react";
 
 import './header.css';
+import NightModeIcon from "./NightModeIcon";
 
-export default function Header() {
+
+function Header(props) {
   return (
-      <div className="Header">
-        <h1>FIRE!</h1>
-        <button className="Button" ></button>
+      <div className="header">
+        <h1>Title</h1>
+        <NightModeIcon onClick={props.toggleNightMode}/>
       </div>
   );
 }
+export default Header;

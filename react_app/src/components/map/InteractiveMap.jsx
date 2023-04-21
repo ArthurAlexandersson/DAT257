@@ -1,7 +1,9 @@
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import "./interactiveMap.css";
-import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
-import { useState } from "react";
+import { GoogleMap, useLoadScript, MarkerF} from "@react-google-maps/api";
+import Header from "../header/Header";
+import Footer from "../footer/Footer";
+import { useState} from "react";
 
 const InteractiveMap = ({ eventData }) => {
 
@@ -39,11 +41,12 @@ const InteractiveMap = ({ eventData }) => {
     restriction: {
       latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
     }, 
-    disableDefaultUI:true,
+    
   }
 
   const [isCustomStyle, setIsCustomStyle] = useState(false);
-  const nightModeSwitch = () => {
+
+  const toggleNightMode = () => {
     if(isCustomStyle){
       setMapStyles([]);
       setIsCustomStyle(false);
@@ -131,18 +134,25 @@ const InteractiveMap = ({ eventData }) => {
     ]);
     setIsCustomStyle(true)
     }
-      
   }
-
+  const mapHeight = `calc(100vh - 60px - 60px)`
   if (!isLoaded) return <div></div>;
   return (
     <>
-    <GoogleMap options = {{...OPTIONS , styles: mapStyles}}  zoom={12} center={center} mapContainerClassName="map_container">
-
+  
+    <Header  toggleNightMode={toggleNightMode}/>
+    <div style={{height: mapHeight}}>
+    <GoogleMap 
+    options = {{...OPTIONS , styles: mapStyles}}  
+    zoom={12} 
+    center={center} 
+    mapContainerStyle={{height:'100%'}} 
+    mapContainerClassName="map_container">
       <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
       {fireMarkers}
-      <button onClick={nightModeSwitch}> </button>
     </GoogleMap>
+    </div>
+    <Footer/>
     </>
   );
 };
