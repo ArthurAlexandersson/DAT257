@@ -1,4 +1,9 @@
+Week 1:
 I would like to understand better how it is to work in agile due to the fact that I in the summer will be working for a company that works agile.
 I would like to understand Scrum better due to the previous reason where I will be working in CI team during the summer in the company.
 Having open communication has helped, even though there was a bit of miscommunication during the week where one member unfortunetly went to campus and the rest stayed home for the meeting.
 Having a clearer communication is a way for us all to improve. 
+
+Week 2:
+This week has been a productive week, we have finished the desired user stories and are continuing to learn how to work agile.
+We have been working with the Google api to extract data from both latitude and longitude of data. I am interested to see how effective the process of working in a large group and working agile at the same time. We have been working on different branches that we later merge by the end of the week. What could be improved for next week is yet again better communication and dividing different tasks/user stories.  
