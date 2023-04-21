@@ -1,12 +1,12 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo, useContext} from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF} from "@react-google-maps/api";
-import MapEvent from "../mapEvent/MapEvent";
-import Header from "../header/Header";
-import Footer from "../footer/Footer";
-import { useState} from "react";
+import MapEvent from '../mapEvent/MapEvent';
+import {darkModeContext} from '../../App';
+import {useState} from 'react';
 
 const InteractiveMap = ({ eventData }) => {
+  const {isDarkModeState} = useContext(darkModeContext);
 
   const fireMarkers = eventData.map((event) => {
     if (event.categories[0].title === "Wildfires") {
@@ -42,14 +42,13 @@ const InteractiveMap = ({ eventData }) => {
       latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
     }, 
     
+    
   }
 
-  const [isCustomStyle, setIsCustomStyle] = useState(false);
 
-  const toggleNightMode = () => {
-    if(isCustomStyle){
+  useEffect(()=>{
+    if(isDarkModeState){
       setMapStyles([]);
-      setIsCustomStyle(false);
     }
     else{
       setMapStyles([
@@ -132,27 +131,26 @@ const InteractiveMap = ({ eventData }) => {
           stylers: [{ color: "#17263c" }],
         },
     ]);
-    setIsCustomStyle(true)
     }
-  }
+  },[isDarkModeState])
+
   const mapHeight = `calc(100vh - 60px - 60px)`
   if (!isLoaded) return <div></div>;
   return (
     <>
-  
-    <Header  toggleNightMode={toggleNightMode}/>
+   
     <div style={{height: mapHeight}}>
     <GoogleMap 
-    options = {{...OPTIONS , styles: mapStyles}}  
+    options = {{...OPTIONS , styles: mapStyles, disableDefaultUI: true}}  
     zoom={12} 
     center={center} 
     mapContainerStyle={{height:'100%'}} 
-    mapContainerClassName="map_container">
+    mapContainerClassName="map_container"
+    >
       <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
       {fireMarkers}
     </GoogleMap>
     </div>
-    <Footer/>
     </>
   );
 };

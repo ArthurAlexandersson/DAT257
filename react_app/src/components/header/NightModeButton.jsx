@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import './header.css';
-const NightModeButton = ({ onClick }) => {
+import {darkModeContext} from '../../App'
+
+const NightModeButton = () => {
   return (
     <button className="nightModeButton"
-      onClick={onClick}
+      onClick={()=>setDarkmode(!isDarkmode)}
       style={{
         backgroundColor: "white",
         padding: 8,

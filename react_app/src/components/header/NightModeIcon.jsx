@@ -1,9 +1,13 @@
-import * as React from 'react';
+import React, {useContext, useState} from 'react';
 import { useSpring, animated } from "react-spring";
 import './header.css';
+import {darkModeContext} from '../../App'
 
+const NightModeIcon = () => {
+    const {isDarkModeState, setDarkModeState} = useContext(darkModeContext);
 
-const NightModeIcon = ({onClick}) => {
+    const [isDarkMode, setDarkMode] = useState(false);
+
     const properties = {
         dark: {
             r: 9,
@@ -22,7 +26,7 @@ const NightModeIcon = ({onClick}) => {
         springConfig: { mass: 4, tension: 250, friction: 35 }
         };
         
-    const [isDarkMode, setDarkMode] = React.useState(false);
+    
   
     const toggleDarkMode = () => {
       setDarkMode(previous => !previous);
@@ -58,10 +62,15 @@ const NightModeIcon = ({onClick}) => {
           strokeLinecap="round"
           strokeLinejoin="round"
           stroke="currentColor"
+
           onClick={() =>{
+
             toggleDarkMode();
-            onClick();
+
+            setDarkModeState(!isDarkModeState);
+
             }}
+            
           style={{
             cursor: "pointer",
             ...svgContainerProps
