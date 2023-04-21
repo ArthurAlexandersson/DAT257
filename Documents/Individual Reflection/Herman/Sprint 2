@@ -1,0 +1,19 @@
+Herman Norén
+Individual reflection week 16
+Sprint 2
+
+Sprint 2 har fungerat bra. Vi började veckan med att ha ett möte där vi planerade sprinten och valde vilka
+user stories vi skulle jobba med. Denna veckan har vi haft mer fokus på att utveckla projektet än förra veckan där vi
+mest la fokus på att få igång projektet på allas enheter.
+
+Jag har arbetat med att implementera datan Benjamin har extraherat från en CSV-fil samt göra nålarna som pekar på
+eldarna mer interaktiva. Det går nu att klicka på en nål så byts nålen ut mot en cirkel som ska symbolisera hur stor
+elden är / var. Vi har dock ingen data på hur stora eldarna är, men till skillnad från datan vi använde tidigare så har 
+Benjamins data information om ljusstyrka och FRP. Baserat på detta gör jag en väldigt *ytlig* beräkning på hur stor elden är 
+(som inte är i närheten av rätt men funktionaliteten finns där) samt ändrar färg på ytan beroende på eldens ljusstyrka.
+
+Den nya datan har dock väldigt många fler eldar än den vi använde tidigare. Det finns ca 320 000 eldar att mappa 
+och det blir väldigt laggigt när man målar ut för många pins på kartan. Jag har därför börjat arbeta på att optimisera 
+hur vi målar ut pins men har inte gjort så mycket framsteg än.
+
+Nästa veckan kommer jag lägga fokus på att fortsätta med optimiseringen av hur vi målar ut pins.
