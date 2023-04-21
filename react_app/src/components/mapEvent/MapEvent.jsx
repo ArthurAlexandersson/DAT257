@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-const MapEvent = ({ lat, lng, radius, label }) => {
+const MapEvent = ({ lat, lng, radius, label, openInfo, event }) => {
   const [clicked, setClicked] = useState(false);
   if (clicked)
     return (
@@ -19,6 +19,7 @@ const MapEvent = ({ lat, lng, radius, label }) => {
       label={label}
       onClick={() => {
         setClicked(!clicked);
+        openInfo(event);
       }}
     ></MarkerF>
   );

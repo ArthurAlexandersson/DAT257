@@ -1,0 +1,56 @@
+.info-container {
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    display: flex;
+    width: 20%;
+    height: 100vh;
+    background-color: white;
+    position: absolute;
+    right: 0;
+    border: black;
+    border-radius: 3px;
+}
+.close-button {
+    height: 100vh;
+    width: 5%;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+.close-button:hover {
+    background-color: gray;
+    border: 2px solid gray;
+}
+.info-title {
+    font-size: 25px;
+    font-style: oblique;
+    padding: 10px;
+}
+
+.info-coordinates {
+    padding: 20px;
+    font-style: italic;
+}
+.coordinates {
+    font-weight: bold;
+    font-style: normal;
+    display: inline;
+}
+.info {
+    padding: 20px;
+}
+.date {
+    font-weight: bold;
+    display: inline;
+}
+.brightness {
+    font-weight: bold;
+    display: inline;
+}
+.frp {
+    font-weight: bold;
+    display: inline;
+}
