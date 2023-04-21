@@ -162,20 +162,13 @@ const InteractiveMap = ({ eventData }) => {
     >
       <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
       {fireMarkers}
+      {selectedEvent && (
+          <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
+      )}
     </GoogleMap>
     </div>
     </>
   );
-    if (!isLoaded) return <div></div>;
-    return (
-        <GoogleMap zoom={12} center={center} mapContainerClassName="map_container">
-            <MarkerF position={hermansHus} label={"Hermans Hus! :D"} />
-            {fireMarkers}
-            {selectedEvent && (
-                <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
-            )}
-        </GoogleMap>
-    );
 };
 
 export default React.memo(InteractiveMap);
