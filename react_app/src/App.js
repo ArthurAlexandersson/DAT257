@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import "./App.css";
 import InteractiveMap from "./components/map/InteractiveMap";
 import MapLoader from "./components/loader/MapLoader";
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+
+export const darkModeContext = createContext();
 
 function App() {
+
   const [eventData, setEventData] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
+  const [isDarkModeState, setDarkModeState] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -20,9 +26,21 @@ function App() {
     fetchEvents();
   }, []);
 
+  
   return (
     <div className="App">
-      {!loadingData ? <InteractiveMap eventData={eventData} /> : <MapLoader />}
+      <darkModeContext.Provider
+        value={{
+          isDarkModeState,
+          setDarkModeState,
+        }}
+      >
+
+        <Header />
+          {!loadingData ? <InteractiveMap eventData={eventData} /> : <MapLoader />}
+        <Footer/>
+        
+      </darkModeContext.Provider>
     </div>
      
   );
