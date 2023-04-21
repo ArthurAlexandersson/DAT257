@@ -24,6 +24,7 @@ function App() {
     <div className="App">
       {!loadingData ? <InteractiveMap eventData={eventData} /> : <MapLoader />}
     </div>
+     
   );
 }
 
