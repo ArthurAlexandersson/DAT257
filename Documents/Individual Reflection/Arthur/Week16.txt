@@ -1,0 +1,11 @@
+##Week 15##
+Under sprint 2 arbetade jag med att skapa en dark-mode knapp. Denna skapades som en svg som med och react-spring
+för animationer.
+
+Jag skapade även en väldigt basic header och footer. Dessa är tänkta att ha mer funktionalitet, så som 
+en sökruta, ytterligare knappar osv. 
+
+Inför nästa vecka ska jag lära mig mer om react, t.ex. context. 
+
+Jag tycker även att gruppen har arbetat på väldigt bra denna sprint och jag ser fram emot att se hur 
+långt vi kan utvecklas som grupp. 
