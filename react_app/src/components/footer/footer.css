@@ -9,3 +9,9 @@
     background-color: rgb(11, 11, 11);
     color: #fff;
 }
+
+.about_us{
+    position: absolute;
+    right: 0;
+    margin-right: 30px;
+}
