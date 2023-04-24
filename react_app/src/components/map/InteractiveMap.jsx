@@ -1,50 +1,23 @@
-<<<<<<< HEAD
-import React, {useEffect, useMemo, useContext, useState} from "react";
+import React, { useEffect, useMemo, useContext, useState } from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
-=======
-import React from "react";
-import "./interactiveMap.css";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
->>>>>>> new-fire-data-test
 import MapEvent from "../mapEvent/MapEvent";
-import {darkModeContext} from '../../App';
-
-const mapOptions = {
-  zoom: 12,
-  center: { lat: 57.9, lng: 12.5 },
-};
+import { darkModeContext } from "../../App";
 
 const InteractiveMap = ({ eventData }) => {
-<<<<<<< HEAD
-  const {isDarkModeState} = useContext(darkModeContext);
+  const { isDarkModeState } = useContext(darkModeContext);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   const handleMarkerClick = (event) => {
-    setSelectedEvent(event)
+    setSelectedEvent(event);
   };
 
   const handleInfoClose = () => {
     setSelectedEvent(null);
   };
 
-  const fireMarkers = eventData.map((event) => {
-    if (event.categories[0].title === "Wildfires") {
-      return (
-        <MapEvent
-          lat={event.geometries[0].coordinates[1]}
-          lng={event.geometries[0].coordinates[0]}
-          radius={5000}
-          label={"Eld"}
-          openInfo={handleMarkerClick}
-          event={event}
-        ></MapEvent>
-      );
-    }
-    return null;
-=======
   const slicedArray = eventData.slice(0, 500);
   const fireMarkers = slicedArray.map((event) => {
     const color = `rgb(255, ${
@@ -58,25 +31,23 @@ const InteractiveMap = ({ eventData }) => {
         radius={parseFloat(event.frp * 5)}
         color={color}
         label={"Eld"}
+        openInfo={handleMarkerClick}
+        event={event}
       ></MapEvent>
     );
->>>>>>> new-fire-data-test
   });
 
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+  });
 
-<<<<<<< HEAD
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
-    });
+  const center = useMemo(() => ({ lat: 57.9, lng: 12.5 }), []);
+  const hermansHus = useMemo(
+    () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
+    []
+  );
 
-    const center = useMemo(() => ({ lat: 57.9, lng: 12.5 }), []);
-    const hermansHus = useMemo(
-        () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
-        []
-    );
-
-  const [mapStyles, setMapStyles] = useState([
-]);
+  const [mapStyles, setMapStyles] = useState([]);
 
   const OPTIONS = {
     minZoom: 4,
@@ -84,16 +55,12 @@ const InteractiveMap = ({ eventData }) => {
     restriction: {
       latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
     },
+  };
 
-
-  }
-
-
-  useEffect(()=>{
-    if(isDarkModeState){
+  useEffect(() => {
+    if (isDarkModeState) {
       setMapStyles([]);
-    }
-    else{
+    } else {
       setMapStyles([
         { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
         { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
@@ -173,35 +140,29 @@ const InteractiveMap = ({ eventData }) => {
           elementType: "labels.text.stroke",
           stylers: [{ color: "#17263c" }],
         },
-    ]);
+      ]);
     }
-  },[isDarkModeState])
+  }, [isDarkModeState]);
 
-  const mapHeight = `calc(100vh - 60px - 60px)`
+  const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <div></div>;
   return (
     <>
-
-    <div style={{height: mapHeight}}>
-    <GoogleMap
-    options = {{...OPTIONS , styles: mapStyles, disableDefaultUI: true}}
-    zoom={12}
-    center={center}
-    mapContainerStyle={{height:'100%'}}
-    mapContainerClassName="map_container"
-    >
-      <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
-=======
-  if (!isLoaded) return <div></div>;
-  return (
-    <GoogleMap options={mapOptions} mapContainerClassName="map_container">
->>>>>>> new-fire-data-test
-      {fireMarkers}
-      {selectedEvent && (
-          <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
-      )}
-    </GoogleMap>
-    </div>
+      <div style={{ height: mapHeight }}>
+        <GoogleMap
+          options={{ ...OPTIONS, styles: mapStyles, disableDefaultUI: true }}
+          zoom={12}
+          center={center}
+          mapContainerStyle={{ height: "100%" }}
+          mapContainerClassName="map_container"
+        >
+          <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
+          {fireMarkers}
+          {selectedEvent && (
+            <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
+          )}
+        </GoogleMap>
+      </div>
     </>
   );
 };

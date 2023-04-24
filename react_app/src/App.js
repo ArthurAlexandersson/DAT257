@@ -2,17 +2,13 @@ import { useEffect, useState, createContext } from "react";
 import "./App.css";
 import InteractiveMap from "./components/map/InteractiveMap";
 import MapLoader from "./components/loader/MapLoader";
-<<<<<<< HEAD
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Header from "./components/header/Header";
+import Footer from "./components/footer/Footer";
+import fireData from "./fireValues/output.json";
 
 export const darkModeContext = createContext();
-=======
-import fireData from "./fireValues/output.json";
->>>>>>> new-fire-data-test
 
 function App() {
-
   const [eventData, setEventData] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
   const [isDarkModeState, setDarkModeState] = useState(false);
@@ -33,7 +29,6 @@ function App() {
     fetchEvents();
   }, []);
 
-  
   return (
     <div className="App">
       <darkModeContext.Provider
@@ -42,14 +37,15 @@ function App() {
           setDarkModeState,
         }}
       >
-
         <Header />
-          {!loadingData ? <InteractiveMap eventData={eventData} /> : <MapLoader />}
-        <Footer/>
-        
+        {!loadingData ? (
+          <InteractiveMap eventData={eventData} />
+        ) : (
+          <MapLoader />
+        )}
+        <Footer />
       </darkModeContext.Provider>
     </div>
-     
   );
 }
 
