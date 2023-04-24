@@ -11,7 +11,6 @@ const InteractiveMap = ({ eventData }) => {
           lat={event.geometries[0].coordinates[1]}
           lng={event.geometries[0].coordinates[0]}
           radius={5000}
-          label={"led"}
         ></MapEvent>
       );
     }
@@ -37,4 +36,4 @@ const InteractiveMap = ({ eventData }) => {
   );
 };
 
-export default React.memo(InteractiveMap);
+export default InteractiveMap;
