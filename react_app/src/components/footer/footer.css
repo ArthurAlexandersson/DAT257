@@ -9,3 +9,35 @@
     background-color: rgb(11, 11, 11);
     color: #fff;
 }
+
+.slide-down {
+    animation: slide-down 1s forwards;
+  }
+  
+  @keyframes slide-down {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  .button {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .slide-up {
+    animation: slide-up 1s forwards;
+  }
+  
+  @keyframes slide-up {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
