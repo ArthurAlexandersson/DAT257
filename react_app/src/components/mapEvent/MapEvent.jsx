@@ -1,26 +1,8 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-const colors = [
-  {
-    name: "dark",
-    threshhold: 10,
-    color: "#FF0000",
-  },
-  {
-    name: "medium",
-    threshhold: 30,
-    color: "#FF7400",
-  },
-  {
-    name: "bright",
-    threshhold: 50,
-    color: "#FFFF00",
-  },
-];
-
 const MapEvent = ({ lat, lng, radius, label, color }) => {
-  const [clicked, setClicked] = useState(true);
+  const [clicked, setClicked] = useState(false);
   if (clicked) {
     return (
       <Circle

@@ -9,7 +9,7 @@ const mapOptions = {
 };
 
 const InteractiveMap = ({ eventData }) => {
-  const slicedArray = eventData.slice(0, 9000);
+  const slicedArray = eventData.slice(0, 500);
   const fireMarkers = slicedArray.map((event) => {
     const color = `rgb(255, ${
       (parseFloat(event.brightness - 300) / 90) * 100
@@ -19,7 +19,7 @@ const InteractiveMap = ({ eventData }) => {
       <MapEvent
         lat={parseFloat(event.latitude)}
         lng={parseFloat(event.longitude)}
-        radius={parseFloat(event.frp * 10)}
+        radius={parseFloat(event.frp * 5)}
         color={color}
         label={"Eld"}
       ></MapEvent>
