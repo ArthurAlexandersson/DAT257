@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-const MapEvent = ({ lat, lng, radius, label, color, openInfo, event }) => {
+const MapEvent = ({ lat, lng, radius, color, openInfo, event }) => {
   const [clicked, setClicked] = useState(false);
   if (clicked) {
     return (
@@ -18,10 +18,15 @@ const MapEvent = ({ lat, lng, radius, label, color, openInfo, event }) => {
   return (
     <MarkerF
       position={{ lat: lat, lng: lng }}
-      label={label}
       onClick={() => {
         setClicked(!clicked);
         openInfo(event);
+      }}
+      //This label is need in order to ensure correct shape of symbol :(
+      label={""}
+      icon={{
+          url: (require("./fire.svg").default),
+          scaledSize: {width: 30, height: 30}
       }}
     ></MarkerF>
   );

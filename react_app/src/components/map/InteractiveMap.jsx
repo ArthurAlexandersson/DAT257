@@ -30,7 +30,6 @@ const InteractiveMap = ({ eventData }) => {
         lng={parseFloat(event.longitude)}
         radius={parseFloat(event.frp * 5)}
         color={color}
-        label={"Eld"}
         openInfo={handleMarkerClick}
         event={event}
       ></MapEvent>
@@ -167,4 +166,4 @@ const InteractiveMap = ({ eventData }) => {
   );
 };
 
-export default React.memo(InteractiveMap);
+export default InteractiveMap;
