@@ -6,8 +6,8 @@ const fs = require('fs/promises');
 const path = require('path');
 
 // Define input and output file paths
-const inputFile = path.join(__dirname, '..', '..', 'Documents', 'fireValues', 'fires2021.csv');
-const outputFile = path.join(__dirname, '..', '..', 'Documents', 'fireValues', 'output.json');
+const inputFile = path.join(__dirname, '..', '..', 'react_app', 'fireValues', 'fires2021.csv');
+const outputFile = path.join(__dirname, '..', '..', 'react_app', 'fireValues', 'output.json');
 
 // Function to convert CSV to JSON
 async function convertCsvToJson(input, output) {

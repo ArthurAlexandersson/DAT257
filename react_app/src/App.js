@@ -2,10 +2,14 @@ import { useEffect, useState, createContext } from "react";
 import "./App.css";
 import InteractiveMap from "./components/map/InteractiveMap";
 import MapLoader from "./components/loader/MapLoader";
+<<<<<<< HEAD
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 
 export const darkModeContext = createContext();
+=======
+import fireData from "./fireValues/output.json";
+>>>>>>> new-fire-data-test
 
 function App() {
 
@@ -16,10 +20,13 @@ function App() {
   useEffect(() => {
     const fetchEvents = async () => {
       setLoadingData(true);
+      /*
       const res = await fetch("https://eonet.gsfc.nasa.gov/api/v2.1/events");
       const { events } = await res.json();
+      */
 
-      setEventData(events);
+      /* setEventData(events); */
+      setEventData(fireData);
       setLoadingData(false);
     };
 

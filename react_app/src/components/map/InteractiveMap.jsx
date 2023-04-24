@@ -1,11 +1,23 @@
+<<<<<<< HEAD
 import React, {useEffect, useMemo, useContext, useState} from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
+=======
+import React from "react";
+import "./interactiveMap.css";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+>>>>>>> new-fire-data-test
 import MapEvent from "../mapEvent/MapEvent";
 import {darkModeContext} from '../../App';
 
+const mapOptions = {
+  zoom: 12,
+  center: { lat: 57.9, lng: 12.5 },
+};
+
 const InteractiveMap = ({ eventData }) => {
+<<<<<<< HEAD
   const {isDarkModeState} = useContext(darkModeContext);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -32,9 +44,27 @@ const InteractiveMap = ({ eventData }) => {
       );
     }
     return null;
+=======
+  const slicedArray = eventData.slice(0, 500);
+  const fireMarkers = slicedArray.map((event) => {
+    const color = `rgb(255, ${
+      (parseFloat(event.brightness - 300) / 90) * 100
+    }, 0`;
+
+    return (
+      <MapEvent
+        lat={parseFloat(event.latitude)}
+        lng={parseFloat(event.longitude)}
+        radius={parseFloat(event.frp * 5)}
+        color={color}
+        label={"Eld"}
+      ></MapEvent>
+    );
+>>>>>>> new-fire-data-test
   });
 
 
+<<<<<<< HEAD
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     });
@@ -161,6 +191,11 @@ const InteractiveMap = ({ eventData }) => {
     mapContainerClassName="map_container"
     >
       <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
+=======
+  if (!isLoaded) return <div></div>;
+  return (
+    <GoogleMap options={mapOptions} mapContainerClassName="map_container">
+>>>>>>> new-fire-data-test
       {fireMarkers}
       {selectedEvent && (
           <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
