@@ -3,8 +3,8 @@ import "./fireInfoWindow.css";
 const FireInfoWindow = ({ event, onClose }) => {
 
     // Change these from hard coded to match the json data
-    const lat = event.geometries[0].coordinates[1];
-    const lng = event.geometries[0].coordinates[0];
+    const lat = parseFloat(event.latitude);
+    const lng = parseFloat(event.longitude);
     const brightness = 332.9;
     const acq_date = "2021-01-14";
     const frp = 41.2;
@@ -16,7 +16,7 @@ const FireInfoWindow = ({ event, onClose }) => {
     };
     return (
         <div className="info-container">
-            <button className="close-button" onClick={handleClose}> > </button>
+            <button className="close-button" onClick={handleClose}>  </button>
             <div className="info-content">
                 <div className="info-title">
                     {title}

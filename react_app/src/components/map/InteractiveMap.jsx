@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import React, {useEffect, useMemo, useContext, useState} from "react";
 import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
-=======
-import React from "react";
-import "./interactiveMap.css";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
->>>>>>> new-fire-data-test
 import MapEvent from "../mapEvent/MapEvent";
 import {darkModeContext} from '../../App';
 
@@ -17,7 +11,6 @@ const mapOptions = {
 };
 
 const InteractiveMap = ({ eventData }) => {
-<<<<<<< HEAD
   const {isDarkModeState} = useContext(darkModeContext);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -30,21 +23,6 @@ const InteractiveMap = ({ eventData }) => {
     setSelectedEvent(null);
   };
 
-  const fireMarkers = eventData.map((event) => {
-    if (event.categories[0].title === "Wildfires") {
-      return (
-        <MapEvent
-          lat={event.geometries[0].coordinates[1]}
-          lng={event.geometries[0].coordinates[0]}
-          radius={5000}
-          label={"Eld"}
-          openInfo={handleMarkerClick}
-          event={event}
-        ></MapEvent>
-      );
-    }
-    return null;
-=======
   const slicedArray = eventData.slice(0, 500);
   const fireMarkers = slicedArray.map((event) => {
     const color = `rgb(255, ${
@@ -58,13 +36,13 @@ const InteractiveMap = ({ eventData }) => {
         radius={parseFloat(event.frp * 5)}
         color={color}
         label={"Eld"}
+        openInfo={handleMarkerClick}
+        event={event}
       ></MapEvent>
     );
->>>>>>> new-fire-data-test
   });
 
 
-<<<<<<< HEAD
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     });
@@ -191,11 +169,6 @@ const InteractiveMap = ({ eventData }) => {
     mapContainerClassName="map_container"
     >
       <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
-=======
-  if (!isLoaded) return <div></div>;
-  return (
-    <GoogleMap options={mapOptions} mapContainerClassName="map_container">
->>>>>>> new-fire-data-test
       {fireMarkers}
       {selectedEvent && (
           <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />

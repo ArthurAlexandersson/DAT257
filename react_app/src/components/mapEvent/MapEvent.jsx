@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-<<<<<<< HEAD
-const MapEvent = ({ lat, lng, radius, label, openInfo, event }) => {
-=======
-const MapEvent = ({ lat, lng, radius, label, color }) => {
->>>>>>> new-fire-data-test
+
+const MapEvent = ({ lat, lng, radius, label, color, openInfo, event}) => {
   const [clicked, setClicked] = useState(false);
   if (clicked) {
     return (
