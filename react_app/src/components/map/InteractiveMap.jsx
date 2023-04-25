@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useContext, useState } from "react";
 import "./interactiveMap.css";
-import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  MarkerF,
+  MarkerClusterer,
+} from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
 import MapEvent from "../mapEvent/MapEvent";
 import { darkModeContext } from "../../App";
@@ -18,23 +23,31 @@ const InteractiveMap = ({ eventData }) => {
     setSelectedEvent(null);
   };
 
-  const slicedArray = eventData.slice(0, 500);
-  const fireMarkers = slicedArray.map((event) => {
-    const color = `rgb(255, ${
-      (parseFloat(event.brightness - 300) / 90) * 100
-    }, 0`;
+  const slicedArray = eventData.slice(0, 10000);
+  const fireMarkers = (
+    <MarkerClusterer>
+      {(clusterer) =>
+        slicedArray.map((event, index) => {
+          const color = `rgb(255, ${
+            (parseFloat(event.brightness - 300) / 90) * 100
+          }, 0`;
 
-    return (
-      <MapEvent
-        lat={parseFloat(event.latitude)}
-        lng={parseFloat(event.longitude)}
-        radius={parseFloat(event.frp * 5)}
-        color={color}
-        openInfo={handleMarkerClick}
-        event={event}
-      ></MapEvent>
-    );
-  });
+          return (
+            <MapEvent
+              key={index}
+              lat={parseFloat(event.latitude)}
+              lng={parseFloat(event.longitude)}
+              radius={parseFloat(event.frp * 5)}
+              color={color}
+              openInfo={handleMarkerClick}
+              event={event}
+              clusterer={clusterer}
+            ></MapEvent>
+          );
+        })
+      }
+    </MarkerClusterer>
+  );
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -155,8 +168,8 @@ const InteractiveMap = ({ eventData }) => {
           mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
         >
-          <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {fireMarkers}
+          <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
             <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
           )}
@@ -166,4 +179,4 @@ const InteractiveMap = ({ eventData }) => {
   );
 };
 
-export default InteractiveMap;
+export default React.memo(InteractiveMap);
