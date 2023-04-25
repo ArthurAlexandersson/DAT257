@@ -1,7 +1,8 @@
 import * as React from "react";
 import './footer.css';
 import { useState } from "react";
-
+import { ReactComponent as ButtonImage } from './expand_more.svg';
+import { ReactComponent as ButtonImage1 } from './expand_less.svg';
 function Footer() {
   let footer_size=60;
   const [isOpen, setIsOpen] = useState(true);
@@ -21,7 +22,9 @@ function Footer() {
   };
   return (
       <div className={`footer`}> Footer
-      <button className="button" onClick={handleClose}>Click me!</button>
+      <button className="button" onClick={handleClose}>
+      {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
+      </button>
        </div>
       
   );
