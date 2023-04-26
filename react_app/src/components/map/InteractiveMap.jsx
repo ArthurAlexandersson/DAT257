@@ -1,14 +1,24 @@
 import React, { useEffect, useMemo, useContext, useState } from "react";
 import "./interactiveMap.css";
-import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  MarkerF,
+  MarkerClusterer,
+} from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
 import MapEvent from "../mapEvent/MapEvent";
 import { darkModeContext } from "../../App";
+import MapLoader from "../loader/MapLoader";
+
+import small from "./cluster_icons/small.png";
+import medium from "./cluster_icons/medium.png";
+import large from "./cluster_icons/large.png";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
-
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [mapStyles, setMapStyles] = useState([]);
 
   const handleMarkerClick = (event) => {
     setSelectedEvent(event);
@@ -18,23 +28,58 @@ const InteractiveMap = ({ eventData }) => {
     setSelectedEvent(null);
   };
 
-  const slicedArray = eventData.slice(0, 500);
-  const fireMarkers = slicedArray.map((event) => {
-    const color = `rgb(255, ${
-      (parseFloat(event.brightness - 300) / 90) * 100
-    }, 0`;
+  // Custom cluster styles.
+  const clusterStyles = [
+    {
+      textColor: "white",
+      url: small,
+      height: 20,
+      width: 20,
+    },
+    {
+      textColor: "white",
+      url: medium,
+      height: 30,
+      width: 30,
+    },
+    {
+      textColor: "white",
+      url: large,
+      height: 40,
+      width: 40,
+    },
+  ];
+  const slicedArray = eventData.slice(0, 10000);
+  const fireMarkers = (
+    <MarkerClusterer
+      styles={clusterStyles}
+      options={{
+        gridSize: 50,
+        minimumClusterSize: 2,
+      }}
+    >
+      {(clusterer) =>
+        slicedArray.map((event, index) => {
+          const color = `rgb(255, ${
+            (parseFloat(event.brightness - 300) / 90) * 100
+          }, 0`;
 
-    return (
-      <MapEvent
-        lat={parseFloat(event.latitude)}
-        lng={parseFloat(event.longitude)}
-        radius={parseFloat(event.frp * 5)}
-        color={color}
-        openInfo={handleMarkerClick}
-        event={event}
-      ></MapEvent>
-    );
-  });
+          return (
+            <MapEvent
+              key={index}
+              lat={parseFloat(event.latitude)}
+              lng={parseFloat(event.longitude)}
+              radius={parseFloat(event.frp * 5)}
+              color={color}
+              openInfo={handleMarkerClick}
+              event={event}
+              clusterer={clusterer}
+            ></MapEvent>
+          );
+        })
+      }
+    </MarkerClusterer>
+  );
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -45,8 +90,6 @@ const InteractiveMap = ({ eventData }) => {
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
     []
   );
-
-  const [mapStyles, setMapStyles] = useState([]);
 
   const OPTIONS = {
     minZoom: 4,
@@ -144,7 +187,7 @@ const InteractiveMap = ({ eventData }) => {
   }, [isDarkModeState]);
 
   const mapHeight = `calc(100vh - 60px - 60px)`;
-  if (!isLoaded) return <div></div>;
+  if (!isLoaded) return <MapLoader />;
   return (
     <>
       <div style={{ height: mapHeight }}>
@@ -155,8 +198,8 @@ const InteractiveMap = ({ eventData }) => {
           mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
         >
-          <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {fireMarkers}
+          <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
             <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
           )}
@@ -166,4 +209,4 @@ const InteractiveMap = ({ eventData }) => {
   );
 };
 
-export default InteractiveMap;
+export default React.memo(InteractiveMap);
