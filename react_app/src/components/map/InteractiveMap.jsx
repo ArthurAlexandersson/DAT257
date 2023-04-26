@@ -32,6 +32,7 @@ const InteractiveMap = ({ eventData }) => {
         color={color}
         openInfo={handleMarkerClick}
         event={event}
+        selected={selectedEvent}
       ></MapEvent>
     );
   });

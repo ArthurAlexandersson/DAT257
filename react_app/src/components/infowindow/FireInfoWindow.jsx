@@ -1,5 +1,5 @@
 import "./fireInfoWindow.css";
-import {InfoBox, InfoWindow} from "@react-google-maps/api";
+import {InfoWindow} from "@react-google-maps/api";
 import React from "react";
 
 const FireInfoWindow = ({ event, onClose }) => {
@@ -14,22 +14,9 @@ const FireInfoWindow = ({ event, onClose }) => {
 
   // Possible to get country/the closest city or something from coordinates passed? Title no longer in our data
   const title = "Wildfire somewhere in the world";
-  const handleClose = () => {
-    onClose();
-  };
-
-  const onLoad = infoWindow => {
-    console.log('infoWindow: ', infoWindow)
-  }
-  const divStyle = {
-    background: `white`,
-    border: `1px solid #ccc`,
-    padding: 15
-  }
 
   return (
       <InfoWindow
-          onLoad={onLoad}
           position = {position}
           onCloseClick={() => onClose()}
       >

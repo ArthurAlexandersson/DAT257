@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-const MapEvent = ({ lat, lng, radius, color, openInfo, event }) => {
+const MapEvent = ({ lat, lng, radius, color, openInfo, event, selected }) => {
   const [clicked, setClicked] = useState(false);
-  if (clicked) {
+  if (selected === event) {
     return (
       <Circle
         center={{ lat: lat, lng: lng }}
