@@ -1,8 +1,10 @@
-import React, { useState } from "react";
 import Slider from "react-slider";
 import "./footer.css";
 import image from "../../img.png";
-
+import * as React from "react";
+import { useState } from "react";
+import { ReactComponent as ButtonImage } from './expand_more.svg';
+import { ReactComponent as ButtonImage1 } from './expand_less.svg';
 function Footer() {
     const [value1, setValue1] = useState(30);
     const [value2, setValue2] = useState(25);
@@ -23,8 +25,26 @@ function Footer() {
     // calculate the image size based on the second slider value
     const imageSize = value2 * 2;
 
+  let footer_size=60;
+  const [isOpen, setIsOpen] = useState(true);
+  const handleClose = () => {
+    const footer = document.querySelector('.footer');
+    if (isOpen) {
+      footer.classList.add('footer-hidden');
+      setIsOpen(false);
+      footer_size=0;
+    } else {
+      footer.classList.remove('footer-hidden');
+      setIsOpen(true);
+      footer_size=60;
+    }
+  };
+
     return (
         <div className="footer">
+          <button className="button" onClick={handleClose}>
+            {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
+          </button>
             <div className="slider-container">
                 <div className="slider1">
                     <Slider
@@ -67,6 +87,7 @@ function Footer() {
             </div>
         </div>
     );
+
 }
 
 export default Footer;

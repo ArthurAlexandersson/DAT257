@@ -2,11 +2,18 @@
     box-sizing: border-box;
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    height: 80px;
+    justify-content: center;
+    height: 60px;
+    align-items: baseline;
     padding: 1em;
-    background-color: rgb(120, 120, 120);
+    background-color: rgb(11, 11, 11);
     color: #fff;
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+}
+.footer-hidden {
+  display: none;
 }
 .slider-container {
     margin-top: 2em; /* increase the margin-top value to move the sliders lower */
@@ -35,3 +42,18 @@
     height: 30px;
     background-color: #fff;
 }
+
+
+.button {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    transition: top 0.3s ease-in-out;
+}
+
+.button-active{
+    bottom: 55px;
+}
+
