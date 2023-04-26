@@ -42,9 +42,6 @@ function Footer() {
 
     return (
         <div className="footer">
-          <button className="button" onClick={handleClose}>
-            {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
-          </button>
             <div className="slider-container">
                 <div className="slider1">
                     <Slider
@@ -85,9 +82,11 @@ function Footer() {
                     />
                 </div>
             </div>
+            <button className="button" onClick={handleClose}>
+                {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
+            </button>
         </div>
     );
-
 }
 
 export default Footer;
