@@ -25,23 +25,25 @@ function Footer() {
     // calculate the image size based on the second slider value
     const imageSize = value2 * 2;
 
-  let footer_size=60;
-  const [isOpen, setIsOpen] = useState(true);
-  const handleClose = () => {
-    const footer = document.querySelector('.footer');
-    if (isOpen) {
-      footer.classList.add('footer-hidden');
-      setIsOpen(false);
-      footer_size=0;
-    } else {
-      footer.classList.remove('footer-hidden');
-      setIsOpen(true);
-      footer_size=60;
-    }
-  };
+    const [isOpen, setIsOpen] = useState(true);
+
+    // Define the handleClose function
+    const handleClose = () => {
+        let footer = document.querySelector('.footer');
+        let button = document.querySelector('.button');
+
+        footer.classList.toggle('footer-exit');
+        button.classList.toggle('button-active');
+
+        // Update the isOpen state
+        setIsOpen(!isOpen);
+    };
+
 
     return (
+    <div>
         <div className="footer">
+            <img src={image} alt="image" style={{ width: imageSize }} />
             <div className="slider-container">
                 <div className="slider1">
                     <Slider
@@ -53,10 +55,6 @@ function Footer() {
                         ariaLabel={"Volume 1"}
                     />
                 </div>
-            </div>
-            <div>
-                {/* add an image that dynamically resizes */}
-                <img src={image} alt="image" style={{ width: imageSize }} />
             </div>
             <div className="slider-container">
                 <div className="slider2">
@@ -82,10 +80,12 @@ function Footer() {
                     />
                 </div>
             </div>
+        </div>
             <button className="button" onClick={handleClose}>
                 {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
             </button>
         </div>
+
     );
 }
 
