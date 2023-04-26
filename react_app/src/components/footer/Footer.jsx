@@ -32,10 +32,10 @@ function Footer() {
               <h4>smthn smthn</h4>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/">yee yee </a>
+                  <a href="#feature">yee yee </a>
                 </li>
                 <li>
-                  <a href="/">yee yee </a>
+                  <a href="/test">yee yee </a>
                 </li>
                 <li>
                   <a href="/">yee yee </a>

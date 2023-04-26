@@ -4,7 +4,8 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
 import MapEvent from "../mapEvent/MapEvent";
 import { darkModeContext } from "../../App";
-import darkModeMapStyle from "../darkModeMapStyle.js";
+import darkModeMapStyle from "./mapStyles/darkModeMapStyle.js";
+import mapStyle from "./mapStyles/mapStyle.js";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
@@ -59,9 +60,9 @@ const InteractiveMap = ({ eventData }) => {
 
   useEffect(() => {
     if (isDarkModeState) {
-      setMapStyles([]);
-    } else {
       setMapStyles(darkModeMapStyle);
+    } else {
+      setMapStyles(mapStyle);
     }
   }, [isDarkModeState]);
 
