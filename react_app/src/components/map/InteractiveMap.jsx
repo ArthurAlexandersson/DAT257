@@ -143,7 +143,7 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [isDarkModeState]);
 
-  const mapHeight = `calc(100vh - 60px)`;
+  const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <div></div>;
   return (
     <>

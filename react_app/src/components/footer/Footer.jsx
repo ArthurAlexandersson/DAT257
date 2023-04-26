@@ -9,23 +9,24 @@ function Footer() {
   const handleClose = () => {
     const footer = document.querySelector('.footer');
     if (isOpen) {
-      footer.classList.add('footer-hidden');
+      footer.classList.add('slide-down');
+      footer.classList.remove('slide-up');
       setIsOpen(false);
       footer_size=0;
     } else {
-      footer.classList.remove('footer-hidden');
+      footer.classList.add('slide-up');
+      footer.classList.remove('slide-down');
       setIsOpen(true);
       footer_size=60;
     }
   };
   return (
-    <div>
       <div className={`footer`}> Footer
-       </div>
       <button className="button" onClick={handleClose}>
       {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
       </button>
-      </div>
+       </div>
+      
   );
 }
 
