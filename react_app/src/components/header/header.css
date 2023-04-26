@@ -13,23 +13,14 @@ h1 {
   height: 10px;
   width: 200px;
 }
-.nightModeIcon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 10px;
-  margin-right: 20px;
-}
-.leaderboardIcon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 10px;
-  margin-right: 50px;
-}
 button {
   position: absolute;
   bottom: 0;
   left: 0;
   color: blue;
+}
+.dropDown {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
