@@ -9,11 +9,16 @@ import {
 import FireInfoWindow from "../infowindow/FireInfoWindow";
 import MapEvent from "../mapEvent/MapEvent";
 import { darkModeContext } from "../../App";
+import MapLoader from "../loader/MapLoader";
+
+import small from "./cluster_icons/small.png";
+import medium from "./cluster_icons/medium.png";
+import large from "./cluster_icons/large.png";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
-
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [mapStyles, setMapStyles] = useState([]);
 
   const handleMarkerClick = (event) => {
     setSelectedEvent(event);
@@ -23,9 +28,36 @@ const InteractiveMap = ({ eventData }) => {
     setSelectedEvent(null);
   };
 
+  // Custom cluster styles.
+  const clusterStyles = [
+    {
+      textColor: "white",
+      url: small,
+      height: 20,
+      width: 20,
+    },
+    {
+      textColor: "white",
+      url: medium,
+      height: 30,
+      width: 30,
+    },
+    {
+      textColor: "white",
+      url: large,
+      height: 40,
+      width: 40,
+    },
+  ];
   const slicedArray = eventData.slice(0, 10000);
   const fireMarkers = (
-    <MarkerClusterer>
+    <MarkerClusterer
+      styles={clusterStyles}
+      options={{
+        gridSize: 50,
+        minimumClusterSize: 2,
+      }}
+    >
       {(clusterer) =>
         slicedArray.map((event, index) => {
           const color = `rgb(255, ${
@@ -58,8 +90,6 @@ const InteractiveMap = ({ eventData }) => {
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
     []
   );
-
-  const [mapStyles, setMapStyles] = useState([]);
 
   const OPTIONS = {
     minZoom: 4,
@@ -157,7 +187,7 @@ const InteractiveMap = ({ eventData }) => {
   }, [isDarkModeState]);
 
   const mapHeight = `calc(100vh - 60px - 60px)`;
-  if (!isLoaded) return <div></div>;
+  if (!isLoaded) return <MapLoader />;
   return (
     <>
       <div style={{ height: mapHeight }}>
