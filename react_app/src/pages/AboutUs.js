@@ -2,7 +2,8 @@ import React from "react";
 
 
 function AboutUs(){
-    return <div><h1>AboutUs</h1>;</div>
+    return <div>aboutus
+    </div>
 };
 
 export default AboutUs;
