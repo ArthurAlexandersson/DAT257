@@ -3,12 +3,14 @@ import "./interactiveMap.css";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
 import MapEvent from "../mapEvent/MapEvent";
-import { darkModeContext } from "../../App";
+import { darkModeContext, leaderboardContext } from "../../App";
 import darkModeMapStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
+import Leaderboard from "../leaderboard/Leaderboard";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
+  const { leaderboardShown } = useContext(leaderboardContext);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -21,6 +23,7 @@ const InteractiveMap = ({ eventData }) => {
   };
 
   const slicedArray = eventData.slice(0, 500);
+
   const fireMarkers = slicedArray.map((event) => {
     const color = `rgb(255, ${
       (parseFloat(event.brightness - 300) / 90) * 100
@@ -66,6 +69,14 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [isDarkModeState]);
 
+  useEffect(() => {
+    if (leaderboardShown) {
+      console.log("leaderboard is shown");
+    } else {
+      console.log("leaderboard is NOT shown");
+    }
+  }, [leaderboardShown]);
+
   const mapHeight = `calc(100vh - 60px - 60px)`;
 
   if (!isLoaded) return <div></div>;
@@ -90,6 +101,8 @@ const InteractiveMap = ({ eventData }) => {
             <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
           )}
         </GoogleMap>
+
+        {leaderboardShown && <Leaderboard data={slicedArray} />}
       </div>
     </>
   );

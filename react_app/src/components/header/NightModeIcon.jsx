@@ -5,7 +5,6 @@ import { darkModeContext } from "../../App";
 
 const NightModeIcon = () => {
   const { isDarkModeState, setDarkModeState } = useContext(darkModeContext);
-
   const [isDarkMode, setDarkMode] = useState(false);
 
   const properties = {
@@ -52,8 +51,8 @@ const NightModeIcon = () => {
     <animated.svg
       className={"nightModeIcon"}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
+      width="30"
+      height="30"
       viewBox="0 0 24 24"
       fill="none"
       strokeWidth="2"
@@ -62,7 +61,6 @@ const NightModeIcon = () => {
       stroke="white"
       onClick={() => {
         toggleDarkMode();
-
         setDarkModeState(!isDarkModeState);
       }}
       style={{

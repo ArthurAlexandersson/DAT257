@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import "./header.css";
+import { leaderboardContext } from "../../App";
 
 const LeaderboardIcon = () => {
+  const { leaderboardShown, setLeaderboardShown } =
+    useContext(leaderboardContext);
   const [isPressed, setPressed] = useState(false);
+
   const properties = {
     opened: {
       transform: "rotate(0deg)",
@@ -29,13 +33,16 @@ const LeaderboardIcon = () => {
     <animated.svg
       className={"leaderboardIcon"}
       fill="#ffffff"
-      height="25px"
-      width="25px"
+      height="30px"
+      width="30px"
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 490 490"
-      onClick={() => iconPressed()}
+      onClick={() => {
+        iconPressed();
+        setLeaderboardShown(!leaderboardShown);
+      }}
       style={{
         cursor: "pointer",
         ...svgContainerProps,
