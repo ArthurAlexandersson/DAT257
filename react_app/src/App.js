@@ -5,7 +5,6 @@ import MapLoader from "./components/loader/MapLoader";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import fireData from "./fireValues/output.json";
-import { Animated } from "react-animated-css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 

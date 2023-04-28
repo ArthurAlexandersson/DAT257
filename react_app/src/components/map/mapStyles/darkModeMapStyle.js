@@ -1,4 +1,4 @@
-export default [
+const darkModeStyle = [
   { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
   { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
   { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
@@ -78,3 +78,4 @@ export default [
     stylers: [{ color: "#17263c" }],
   },
 ];
+export default darkModeStyle;
