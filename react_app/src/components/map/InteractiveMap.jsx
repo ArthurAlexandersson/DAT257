@@ -72,7 +72,6 @@ const InteractiveMap = ({ eventData }) => {
           const color = `rgb(255, ${
             (parseFloat(event.brightness - 300) / 90) * 100
           }, 0`;
-          console.log("hej")
           return (
             <MapEvent
               key={index}

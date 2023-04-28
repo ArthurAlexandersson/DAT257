@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
 const MapEvent = ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
