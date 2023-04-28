@@ -2,13 +2,15 @@ import Slider from "react-slider";
 import "./footer.css";
 import image from "../../img.png";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { ReactComponent as ButtonImage } from './expand_more.svg';
 import { ReactComponent as ButtonImage1 } from './expand_less.svg';
+
+
 function Footer() {
-    const [value1, setValue1] = useState(30);
-    const [value2, setValue2] = useState(25);
-    const [value3, setValue3] = useState(70);
+    const [value1, setValue1] = useState(600);
+    const [value2, setValue2] = useState(50);
+    const [value3, setValue3] = useState(-600);
 
     const handleChange1 = (newValue) => {
         setValue1(newValue);
@@ -22,28 +24,28 @@ function Footer() {
         setValue3(newValue);
     };
 
-    // calculate the image size based on the second slider value
-    const imageSize = value2 * 2;
+    const [isOpen, setOpen] = useState(true);
 
-    const [isOpen, setIsOpen] = useState(true);
-
-    // Define the handleClose function
     const handleClose = () => {
         let footer = document.querySelector('.footer');
         let button = document.querySelector('.button');
 
         footer.classList.toggle('footer-exit');
         button.classList.toggle('button-active');
-
-        // Update the isOpen state
-        setIsOpen(!isOpen);
+        setOpen(!isOpen);
     };
+    useEffect(() => {
+        const imageElement = document.querySelector(".image-container img");
+        if (imageElement) {
+            imageElement.style.right = value1;
+            imageElement.style.top = value3;
+        }
+    }, [value1, value2]);
 
 
     return (
     <div>
         <div className="footer">
-            <img src={image} alt="image" style={{ width: imageSize }} />
             <div className="slider-container">
                 <div className="slider1">
                     <Slider
@@ -53,6 +55,9 @@ function Footer() {
                         thumbClassName="thumb"
                         trackClassName="track"
                         ariaLabel={"Volume 1"}
+                        step={10}
+                        min={1}
+                        max={1000}
                     />
                 </div>
             </div>
@@ -77,6 +82,9 @@ function Footer() {
                         thumbClassName="thumb"
                         trackClassName="track"
                         ariaLabel={"Volume 3"}
+                        step={10}
+                        min={-1450}
+                        max={150}
                     />
                 </div>
             </div>
@@ -84,6 +92,18 @@ function Footer() {
             <button className="button" onClick={handleClose}>
                 {isOpen ? <ButtonImage style={{ width: "10px", height: "10px" }}/> : <ButtonImage1 style={{ width: "10px", height: "10px" }}/>}
             </button>
+        <div className="image-container">
+            <img
+                src={image}
+                alt = "image"
+                style={{
+                    position: "absolute",
+                    bottom: value1,
+                    width: value2 * 2,
+                    right: -value3,
+                }}
+            />
+        </div>
         </div>
 
     );
