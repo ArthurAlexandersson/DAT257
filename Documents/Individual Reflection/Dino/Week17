@@ -1,0 +1,9 @@
+Week 17:
+
+This week has been a bumpy week. I have been trying to get the searchbars 'suggestion' functionality to work. When a user types in a Country/City/Region, 
+a combobox is supposed to appear with suggestion. The initial idea was that the searchbar should have an autocomplete function. 
+The library that was intended for this ideal is currently not working. The searchbar itself looks good however the underlying functionality (api calls) is currently not working. 
+This user story will be a priority next week. Otherwise the setting of working agile has been better than previously thought. 
+Having three meetings every week, Monday, Wednesday and Friday helps with the iteraitons for each sprint (the user stories that is). 
+I would like to better understand how to integrate different api services from google maps/locations that makes the UX better.
+

@@ -13,7 +13,7 @@ import small from "./cluster_icons/small.png";
 import medium from "./cluster_icons/medium.png";
 import large from "./cluster_icons/large.png";
 import { darkModeContext, leaderboardContext } from "../../App";
-import darkModeMapStyle from "./mapStyles/darkModeMapStyle.js";
+import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 
@@ -108,14 +108,16 @@ const InteractiveMap = ({ eventData }) => {
     },
   };
 
+  //Toggle darkmode
   useEffect(() => {
     if (isDarkModeState) {
-      setMapStyles(darkModeMapStyle);
+      setMapStyles(darkModeStyle);
     } else {
       setMapStyles(mapStyle);
     }
   }, [isDarkModeState]);
 
+  //Toggle leaderboard
   useEffect(() => {
     if (leaderboardShown) {
       console.log("leaderboard is shown");
@@ -147,7 +149,6 @@ const InteractiveMap = ({ eventData }) => {
             <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
           )}
         </GoogleMap>
-
         {leaderboardShown && <Leaderboard data={eventData} />}
       </div>
     </>
