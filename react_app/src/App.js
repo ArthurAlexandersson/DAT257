@@ -5,13 +5,18 @@ import MapLoader from "./components/loader/MapLoader";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import fireData from "./fireValues/output.json";
+import { Animated } from "react-animated-css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 export const darkModeContext = createContext();
+export const leaderboardContext = createContext();
 
 function App() {
   const [eventData, setEventData] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
   const [isDarkModeState, setDarkModeState] = useState(false);
+  const [leaderboardShown, setLeaderboardShown] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -37,13 +42,20 @@ function App() {
           setDarkModeState,
         }}
       >
-        <Header />
-        {!loadingData ? (
-          <InteractiveMap eventData={eventData} />
-        ) : (
-          <MapLoader />
-        )}
-        <Footer />
+        <leaderboardContext.Provider
+          value={{
+            leaderboardShown,
+            setLeaderboardShown,
+          }}
+        >
+          <Header />
+          {!loadingData ? (
+            <InteractiveMap eventData={eventData} />
+          ) : (
+            <MapLoader />
+          )}
+          <Footer />
+        </leaderboardContext.Provider>
       </darkModeContext.Provider>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-const MapEvent = ({ lat, lng, radius, color, openInfo, event, selected }) => {
+const MapEvent = ({ lat, lng, radius, color, openInfo, event, selected, clusterer }) => {
   const [clicked, setClicked] = useState(false);
   if (selected === event) {
     return (
@@ -25,9 +25,10 @@ const MapEvent = ({ lat, lng, radius, color, openInfo, event, selected }) => {
       //This label is need in order to ensure correct shape of symbol :(
       label={""}
       icon={{
-          url: (require("./fire.svg").default),
-          scaledSize: {width: 30, height: 30}
+        url: require("./fire.svg").default,
+        scaledSize: { width: 30, height: 30 },
       }}
+      clusterer={clusterer}
     ></MarkerF>
   );
 };
