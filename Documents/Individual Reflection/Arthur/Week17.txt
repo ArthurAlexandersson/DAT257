@@ -1,1 +1,10 @@
 ##Week 15##
+
+Denna vecka har jag arbetat med "leaderboarden" som visar vilka eldar som är prioriterade. För tillfället
+sorteras eldarna beroende på 'frp' värdet (fire radiatiative power), detta går enkelt att ändra beroende
+på vad man är intresserad av. Jag har även uppdaterat det visuella med headern och footern, och istället 
+för att låte headern vara en vanlig 'div' så är den nu en Navbar vilket förenklar om man i framtiden vill 
+implementera navigation. 
+
+Inför nästa vecka vill jag lära mig mer om att filtrera den data som visas på kartan. 
+
