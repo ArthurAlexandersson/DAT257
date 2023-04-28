@@ -24,8 +24,13 @@ const InteractiveMap = ({ eventData }) => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
 
-  const handleMarkerClick = (event) => {
-    setSelectedEvent(event);
+  const toggleInfoOnMarkerClick = (event) => {
+    if(event === selectedEvent) {
+      setSelectedEvent(null);
+    }
+    else {
+      setSelectedEvent(event);
+    }
   };
 
   const handleInfoClose = () => {
@@ -67,7 +72,6 @@ const InteractiveMap = ({ eventData }) => {
           const color = `rgb(255, ${
             (parseFloat(event.brightness - 300) / 90) * 100
           }, 0`;
-
           return (
             <MapEvent
               key={index}
@@ -75,8 +79,9 @@ const InteractiveMap = ({ eventData }) => {
               lng={parseFloat(event.longitude)}
               radius={parseFloat(event.frp * 5)}
               color={color}
-              openInfo={handleMarkerClick}
+              toggleInfo={toggleInfoOnMarkerClick}
               event={event}
+              selected={selectedEvent}
               clusterer={clusterer}
             ></MapEvent>
           );

@@ -1,0 +1,14 @@
+Herman Norén
+Individual reflection week 17
+Sprint 3
+
+Sprint 3 har gått bra. Vi började åter igen veckan/sprinten med att ha ett möte där vi planerade och valde vilka
+user stories vi skulle jobba med. Denna veckan fick vi gjort mer än tidigare veckor.
+
+Jag har fokuserat med att fortsätta arbeta med att optimera att ha ute många eldar på kartran samtidigt. Som tidigare nämnt i tidigare
+rapport var det väldigt laggigt när man målade ut för många pins på kartan, det var väldigt hackigt att navigera runt om det var
+>10.000 eldar / pins. Jag har implementerat kluster som grupperar ihop eldar som ligger i närheten av varandra när kartan är tillräckligt
+långt utzoomad, vilket minimerar antalet pins som målas ut. Nu har vi ute över 60.000 eldar samtidigt utan att det hackar när man navigerar
+runt. Dock tar det fortfarande lång tid att ladda in all data när appen startas.
+
+Nästa vecka kommer jag att lägga fokus på nya user stories beroende på hur vi planerar på sprintplaneringsmötet.

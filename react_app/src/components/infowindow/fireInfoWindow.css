@@ -2,8 +2,8 @@
     display: -webkit-flex;
     -webkit-flex-direction: row;
     display: flex;
-    width: 20%;
-    height: 100vh;
+    width: 450px;
+    height: 250px;
     background-color: white;
     position: absolute;
     right: 0;
@@ -31,7 +31,7 @@
 }
 
 .info-coordinates {
-    padding: 20px;
+    padding: 5px;
     font-style: italic;
 }
 .coordinates {
@@ -52,5 +52,11 @@
 }
 .frp {
     font-weight: bold;
+    display: inline;
+}
+.info-window {
+    width: 250px;
+    height: 125px;
+    font-size: 15px;
     display: inline;
 }
