@@ -1,25 +1,61 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import "./header.css";
+import { leaderboardContext } from "../../App";
 
-const OpenLeaderboardIcon = () => {
+const LeaderboardIcon = () => {
+  const { leaderboardShown, setLeaderboardShown } =
+    useContext(leaderboardContext);
+  const [isPressed, setPressed] = useState(false);
+
+  const properties = {
+    opened: {
+      transform: "rotate(0deg)",
+    },
+    closed: {
+      transform: "rotate(360deg)",
+    },
+    springConfig: { mass: 20, tension: 500, friction: 35 },
+  };
+
+  const iconPressed = () => {
+    setPressed((previous) => !previous);
+  };
+
+  const { transform } = properties[isPressed ? "opened" : "closed"];
+
+  const svgContainerProps = useSpring({
+    transform,
+    config: properties.springConfig,
+  });
+
   return (
-    <svg
+    <animated.svg
       className={"leaderboardIcon"}
       fill="#ffffff"
-      height="25px"
-      width="25px"
+      height="30px"
+      width="30px"
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 490 490"
+      onClick={() => {
+        iconPressed();
+        setLeaderboardShown(!leaderboardShown);
+      }}
+      style={{
+        cursor: "pointer",
+        ...svgContainerProps,
+      }}
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+
       <g
         id="SVGRepo_tracerCarrier"
         stroke-linecap="round"
         stroke-linejoin="round"
       ></g>
+
       <g id="SVGRepo_iconCarrier">
         {" "}
         <g>
@@ -35,8 +71,8 @@ const OpenLeaderboardIcon = () => {
           </g>{" "}
         </g>{" "}
       </g>
-    </svg>
+    </animated.svg>
   );
 };
 
-export default OpenLeaderboardIcon;
+export default LeaderboardIcon;

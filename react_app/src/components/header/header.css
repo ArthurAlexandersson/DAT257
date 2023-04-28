@@ -5,31 +5,23 @@
   color: #fff;
   position: relative;
 }
-h1 {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  height: 10px;
-  width: 200px;
-}
-.nightModeIcon {
+.dropDown {
   position: absolute;
   bottom: 0;
-  right: 0;
-  margin-bottom: 10px;
-  margin-right: 20px;
+  left: 0;
 }
+.form-group {
+  display: flex;
+  align-items: center;
+}
+.btn {
+  margin-left: 10px;
+}
+
 .leaderboardIcon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 10px;
-  margin-right: 50px;
+  margin: 10px;
 }
-button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  color: blue;
+
+.leaderboardIcon {
+  margin: 10px;
 }
