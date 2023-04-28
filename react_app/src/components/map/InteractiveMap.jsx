@@ -102,7 +102,7 @@ const InteractiveMap = ({ eventData }) => {
           )}
         </GoogleMap>
 
-        {leaderboardShown && <Leaderboard data={slicedArray} />}
+        {leaderboardShown && <Leaderboard data={eventData} />}
       </div>
     </>
   );

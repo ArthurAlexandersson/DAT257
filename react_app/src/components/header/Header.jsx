@@ -28,7 +28,8 @@ function Header() {
               placeholder="Search"
               aria-label="Search"
             />
-            <button type="submit" class="btn btn-outline-primary">
+
+            <button type="submit" class="btn btn-outline-secondary  ">
               Search
             </button>
           </div>
