@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useContext, useState } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useContext,
+  useState,
+  createContext,
+} from "react";
 import "./interactiveMap.css";
 import {
   GoogleMap,
@@ -17,18 +23,23 @@ import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 
+export const mapStateContext = createContext();
+
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
   const { leaderboardShown } = useContext(leaderboardContext);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
+  const [mapState, setMapState] = useState({
+    center: { lat: 57.9, lng: 12.5 },
+    zoom: 12,
+  });
 
   const toggleInfoOnMarkerClick = (event) => {
-    if(event === selectedEvent) {
+    if (event === selectedEvent) {
       setSelectedEvent(null);
-    }
-    else {
+    } else {
       setSelectedEvent(event);
     }
   };
@@ -58,7 +69,7 @@ const InteractiveMap = ({ eventData }) => {
       width: 40,
     },
   ];
-  const slicedArray = eventData.slice(0, 10000);
+  const slicedArray = eventData.slice(0, 1000);
   const fireMarkers = (
     <MarkerClusterer
       styles={clusterStyles}
@@ -94,7 +105,6 @@ const InteractiveMap = ({ eventData }) => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
 
-  const center = useMemo(() => ({ lat: 57.9, lng: 12.5 }), []);
   const hermansHus = useMemo(
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
     []
@@ -138,12 +148,14 @@ const InteractiveMap = ({ eventData }) => {
             disableDefaultUI: true,
             gestureHandling: "greedy",
           }}
-          zoom={12}
-          center={center}
+          zoom={mapState.zoom}
+          center={mapState.center}
           mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
         >
-          {fireMarkers}
+          <mapStateContext.Provider value={{ mapState, setMapState }}>
+            {fireMarkers}
+          </mapStateContext.Provider>
           <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
             <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
