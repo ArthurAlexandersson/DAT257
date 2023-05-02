@@ -53,7 +53,9 @@ function App() {
           ) : (
             <MapLoader />
           )}
-          <Footer />
+          {/**
+            <Footer />
+           */}
         </leaderboardContext.Provider>
       </darkModeContext.Provider>
     </div>
