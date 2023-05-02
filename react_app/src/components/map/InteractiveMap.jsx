@@ -109,8 +109,8 @@ const InteractiveMap = ({ eventData }) => {
   };
 
   const handleCenterChange = (newCenter) => {
-    console.log("yee");
     setCenter(newCenter);
+    console.log("new center:", newCenter);
   };
 
   //Toggle darkmode
@@ -130,7 +130,9 @@ const InteractiveMap = ({ eventData }) => {
       console.log("leaderboard is NOT shown");
     }
   }, [leaderboardShown]);
-
+  useEffect(() => {
+    console.log("ye");
+  });
   const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
