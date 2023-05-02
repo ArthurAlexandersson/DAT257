@@ -22,6 +22,7 @@ function App() {
   const [isDarkModeState, setDarkModeState] = useState(false);
   const [leaderboardShown, setLeaderboardShown] = useState(false);
 
+  //Content in this file has been moved to Home.js in pages folder!!!
   return (
     <div className="App">
     <Router>
