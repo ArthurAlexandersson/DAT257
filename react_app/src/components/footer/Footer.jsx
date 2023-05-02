@@ -74,9 +74,7 @@ function Footer() {
                   <a href="/">yee yee </a>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/watch?v=rV5ynCW-kVw&ab_channel=ZxiosExe">
-                    yee yee{" "}
-                  </a>
+                  <a href="/">yee yee </a>
                 </li>
                 <li>
                   <a href="/">yee yee </a>
