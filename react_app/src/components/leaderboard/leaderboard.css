@@ -25,7 +25,15 @@ h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-left: 1em;
-  margin-top: 1em;
+  border-radius: 1em;
+  padding: 1em;
   color: white;
+}
+
+.event:hover {
+  cursor: pointer;
+  background-color: var(--mainLightGrey);
+}
+.event:active {
+  background-color: var(--mainDark);
 }

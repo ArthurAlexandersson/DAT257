@@ -94,6 +94,7 @@ const InteractiveMap = ({ eventData }) => {
   });
 
   const [center, setCenter] = useState({ lat: 57.9, lng: 12.5 });
+  const [zoom, setZoom] = useState(12);
 
   const hermansHus = useMemo(
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
@@ -110,6 +111,7 @@ const InteractiveMap = ({ eventData }) => {
 
   const handleCenterChange = (newCenter) => {
     setCenter(newCenter);
+    setZoom(12);
     console.log("new center:", newCenter);
   };
 
@@ -130,9 +132,6 @@ const InteractiveMap = ({ eventData }) => {
       console.log("leaderboard is NOT shown");
     }
   }, [leaderboardShown]);
-  useEffect(() => {
-    console.log("ye");
-  });
   const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
@@ -145,7 +144,7 @@ const InteractiveMap = ({ eventData }) => {
             disableDefaultUI: true,
             gestureHandling: "greedy",
           }}
-          zoom={12}
+          zoom={zoom}
           center={center}
           mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
