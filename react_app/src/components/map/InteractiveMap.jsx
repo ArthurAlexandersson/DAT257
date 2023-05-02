@@ -93,7 +93,8 @@ const InteractiveMap = ({ eventData }) => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
 
-  const center = useMemo(() => ({ lat: 57.9, lng: 12.5 }), []);
+  const [center, setCenter] = useState({ lat: 57.9, lng: 12.5 });
+
   const hermansHus = useMemo(
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
     []
@@ -105,6 +106,11 @@ const InteractiveMap = ({ eventData }) => {
     restriction: {
       latLngBounds: { north: 85, south: -85, west: -180, east: 180 },
     },
+  };
+
+  const handleCenterChange = (newCenter) => {
+    console.log("yee");
+    setCenter(newCenter);
   };
 
   //Toggle darkmode
@@ -148,7 +154,12 @@ const InteractiveMap = ({ eventData }) => {
             <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
           )}
         </GoogleMap>
-        {leaderboardShown && <Leaderboard data={eventData} />}
+        {leaderboardShown && (
+          <Leaderboard
+            data={eventData}
+            handleCenterChange={handleCenterChange}
+          />
+        )}
       </div>
     </>
   );
