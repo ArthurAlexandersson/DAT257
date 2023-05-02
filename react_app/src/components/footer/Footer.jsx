@@ -83,19 +83,10 @@ function Footer() {
             </Col>
             {/* Column 4 */}
             <Col>
-              <h4>smthn smthn</h4>
+              <h4>About us</h4>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
+                  <a href="/">About us</a>
                 </li>
               </ul>
             </Col>
