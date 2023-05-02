@@ -9,12 +9,17 @@ import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/errorPage";
 
+import fireData from "./fireValues/output.json";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 
 export const darkModeContext = createContext();
+export const leaderboardContext = createContext();
 
 function App() {
 
   const [isDarkModeState, setDarkModeState] = useState(false);
+  const [leaderboardShown, setLeaderboardShown] = useState(false);
 
 /*  useEffect(() => {
     const fetchEvents = async () => {
@@ -33,22 +38,29 @@ function App() {
   }, []);*/
 
   return (
-      <Router>
-          <darkModeContext.Provider
-              value={{
-                  isDarkModeState,
-                  setDarkModeState,
-              }}
-          >
+    <div className="App">
+      <darkModeContext.Provider
+        value={{
+          isDarkModeState,
+          setDarkModeState,
+        }}
+      >
+        <leaderboardContext.Provider
+          value={{
+            leaderboardShown,
+            setLeaderboardShown,
+          }}
+        >
           <Header />
-          <Routes>
-              <Route path="DAT257/" element={<Home/>} />
-              <Route path="DAT257/aboutus" element={<AboutUs/>} />
-              <Route path="*" element={<ErrorPage/>}/>
-          </Routes>
-          </darkModeContext.Provider>
+          {!loadingData ? (
+            <InteractiveMap eventData={eventData} />
+          ) : (
+            <MapLoader />
+          )}
           <Footer />
-      </Router>
+        </leaderboardContext.Provider>
+      </darkModeContext.Provider>
+    </div>
   );
 }
 
