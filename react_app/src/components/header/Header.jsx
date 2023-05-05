@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./header.css";
-import { Navbar } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
+import { Outlet, Link } from "react-router-dom";
 import NightModeIcon from "./NightModeIcon";
 import LogoSVG from "../../svg/logo.svg";
 import LeaderboardIcon from "./LeaderboardIcon";
@@ -13,16 +14,18 @@ function Header() {
   return (
     <Navbar style={{ backgroundColor: "var(--mainDark)" }} variant="dark">
       <div className="container-fluid">
-        <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src={LogoSVG}
-            width="30px"
-            height="30px"
-            className="d-inline-block align-top"
-          />{" "}
-          FireWatcher
-        </Navbar.Brand>
+        <Link to={"/DAT257/"} style={{ textDecoration: "none" }}>
+          <Navbar.Brand>
+            <img
+              alt=""
+              src={LogoSVG}
+              width="30px"
+              height="30px"
+              className="d-inline-block align-top"
+            />{" "}
+            FireWatcher
+          </Navbar.Brand>
+        </Link>
 
         <form class="form-inline">
           <div class="input-group">

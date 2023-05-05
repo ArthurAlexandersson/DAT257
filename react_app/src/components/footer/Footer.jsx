@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
@@ -86,7 +87,10 @@ function Footer() {
               <h4>About us</h4>
               <ul className="list-unstyled">
                 <li>
-                  <a href="/">About us</a>
+                  <Link to="/DAT257/aboutus">About Us</Link>
+                </li>
+                <li>
+                  <Link to="/DAT257/">Home / Map</Link>
                 </li>
               </ul>
             </Col>
