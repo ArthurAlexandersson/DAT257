@@ -1,0 +1,17 @@
+.about-us-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.member-card {
+    text-align: center;
+}
+
+.member-card img {
+    width: 150px;
+    height: 150px;
+    margin-top: -75px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
