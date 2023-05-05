@@ -1,0 +1,17 @@
+Herman Norén
+Individual reflection week 18
+Sprint 4
+
+Sprint 4 har gått bra. Vi började åter igen veckan/sprinten med att ha ett möte där vi planerade och valde vilka
+user stories vi skulle jobba med. Dock var denna veckan lite kortare än tidigare veckor så har inte fått lika mycket gjort.
+Vi hade inte heller ett mid-sprint meating.
+
+Denna veckan har jag lagt fokus på att implementera att mappen pannar till och zoomar in på den pin man klickar på.
+Det har gått lite knackigt med detta då det inte finns någon inbyggt funktionalitet för att mjukt zooma in på
+något, utan man kan sätta en ny zoom-nivå och mappen hoppar direkt dit. Jag anser dock att det blir lite förvirrande
+om man klickar och mappen hoppar dit direkt utan att "visa" vart den går. Därför försökte jag implementera att den zoomar
+in mjukt, men det blir lite problem med hur mappen renderar. Det är dugligt just nu, tror inte det går att få bättre, men
+fortfarande inte bra.
+
+Nästa vecka kommer jag nog kolla vidare lite på detta. Funktionaliteten finns där och den funkar som den ska 
+(ser inte jättebra ut dock) men vill se om det finns något sätt att inte få mappen att "glitcha" när den zoomar in.
