@@ -12,15 +12,14 @@ import MapLoader from "../loader/MapLoader";
 import small from "./cluster_icons/small.png";
 import medium from "./cluster_icons/medium.png";
 import large from "./cluster_icons/large.png";
-import { darkModeContext, leaderboardContext } from "../../App";
+import { darkModeContext, headerContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
-  const { leaderboardShown } = useContext(leaderboardContext);
-
+  const { leaderboardShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
 
@@ -94,7 +93,6 @@ const InteractiveMap = ({ eventData }) => {
   });
 
   const [center, setCenter] = useState({ lat: 57.9, lng: 12.5 });
-  const [zoom, setZoom] = useState(12);
 
   const hermansHus = useMemo(
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
@@ -109,10 +107,9 @@ const InteractiveMap = ({ eventData }) => {
     },
   };
 
+  // Change center
   const handleCenterChange = (newCenter) => {
     setCenter(newCenter);
-    setZoom(12);
-    console.log("new center:", newCenter);
   };
 
   //Toggle darkmode
@@ -144,7 +141,7 @@ const InteractiveMap = ({ eventData }) => {
             disableDefaultUI: true,
             gestureHandling: "greedy",
           }}
-          zoom={zoom}
+          zoom={12}
           center={center}
           mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"

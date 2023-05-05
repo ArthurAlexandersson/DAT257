@@ -7,15 +7,17 @@ import Footer from "./components/footer/Footer";
 import fireData from "./fireValues/output.json";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import Firetips from "./popups/Firetips";
 
 export const darkModeContext = createContext();
-export const leaderboardContext = createContext();
+export const headerContext = createContext();
 
 function App() {
   const [eventData, setEventData] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
   const [isDarkModeState, setDarkModeState] = useState(false);
   const [leaderboardShown, setLeaderboardShown] = useState(false);
+  const [firetipsPopupShown, setFiretipsPopupShown] = useState(false);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -41,12 +43,16 @@ function App() {
           setDarkModeState,
         }}
       >
-        <leaderboardContext.Provider
+        <headerContext.Provider
           value={{
             leaderboardShown,
             setLeaderboardShown,
+            firetipsPopupShown,
+            setFiretipsPopupShown,
           }}
         >
+          {firetipsPopupShown && <Firetips />}
+
           <Header />
           {!loadingData ? (
             <InteractiveMap eventData={eventData} />
@@ -54,7 +60,7 @@ function App() {
             <MapLoader />
           )}
           <Footer />
-        </leaderboardContext.Provider>
+        </headerContext.Provider>
       </darkModeContext.Provider>
     </div>
   );

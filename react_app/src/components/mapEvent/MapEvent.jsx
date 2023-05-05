@@ -1,6 +1,15 @@
 import { Circle, MarkerF } from "@react-google-maps/api";
 
-const MapEvent = ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
+const MapEvent = ({
+  lat,
+  lng,
+  radius,
+  color,
+  toggleInfo,
+  event,
+  selected,
+  clusterer,
+}) => {
   if (selected === event) {
     return (
       <Circle

@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import "./header.css";
-import { leaderboardContext } from "../../App";
+import { headerContext } from "../../App";
 
 const LeaderboardIcon = () => {
-  const { leaderboardShown, setLeaderboardShown } =
-    useContext(leaderboardContext);
+  const { leaderboardShown, setLeaderboardShown } = useContext(headerContext);
   const [isPressed, setPressed] = useState(false);
 
   const properties = {

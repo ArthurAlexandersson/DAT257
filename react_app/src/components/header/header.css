@@ -5,19 +5,9 @@
   color: #fff;
   position: relative;
 }
-.dropDown {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.info:hover {
+  cursor: pointer;
 }
-.form-group {
-  display: flex;
-  align-items: center;
-}
-.btn {
-  margin-left: 10px;
-}
-
 .leaderboardIcon {
   margin: 10px;
 }

@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./header.css";
-import { Container, Navbar } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import NightModeIcon from "./NightModeIcon";
 import LogoSVG from "../../svg/logo.svg";
 import LeaderboardIcon from "./LeaderboardIcon";
+import { headerContext } from "../../App";
+import FilterButton from "./FilterButton";
 
 function Header() {
+  const { firetipsPopupShown, setFiretipsPopupShown } =
+    useContext(headerContext);
   return (
     <Navbar style={{ backgroundColor: "var(--mainDark)" }} variant="dark">
-      <Container>
+      <div className="container-fluid">
         <Navbar.Brand href="#home">
           <img
             alt=""
@@ -34,12 +38,28 @@ function Header() {
             </button>
           </div>
         </form>
+        <div className="collapse navbar-collapse" id="navBarNavMarkup">
+          <ul class="navbar-nav">
+            <a class="nav-item nav-link active" href="#home">
+              Home
+            </a>
+            <a
+              class="nav-item nav-link info"
+              onClick={() => {
+                setFiretipsPopupShown(!firetipsPopupShown);
+              }}
+            >
+              Fire Awareness Tips
+            </a>
+          </ul>
+        </div>
 
         <div class="ms-auto">
           <NightModeIcon />
           <LeaderboardIcon />
+          <FilterButton />
         </div>
-      </Container>
+      </div>
     </Navbar>
   );
 }
