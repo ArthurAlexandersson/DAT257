@@ -39,15 +39,14 @@ function App() {
             }}
           >
             {firetipsPopupShown && <Firetips />}
-
             <Header />
             <Routes>
               <Route path="DAT257/" element={<Home />} />
               <Route path="DAT257/aboutus" element={<AboutUs />} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>
-            <Footer />
           </headerContext.Provider>
+          <Footer />
         </darkModeContext.Provider>
       </Router>
     </div>

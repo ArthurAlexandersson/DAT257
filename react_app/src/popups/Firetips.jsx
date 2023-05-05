@@ -5,7 +5,7 @@ function Firetips() {
   const { firetipsPopupShown, setFiretipsPopupShown } =
     useContext(headerContext);
   return (
-    <div className="p opup">
+    <div className="popup">
       <div className="popup-inner">
         <h3>Very fire tips</h3>
         <ol className="popup-list">
