@@ -25,10 +25,9 @@ const InteractiveMap = ({ eventData }) => {
   const [mapStyles, setMapStyles] = useState([]);
 
   const toggleInfoOnMarkerClick = (event) => {
-    if(event === selectedEvent) {
+    if (event === selectedEvent) {
       setSelectedEvent(null);
-    }
-    else {
+    } else {
       setSelectedEvent(event);
     }
   };
