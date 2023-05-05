@@ -16,10 +16,12 @@ import { darkModeContext, headerContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
+import FilterWindow from "../filter/FilterWindow";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
   const { leaderboardShown } = useContext(headerContext);
+  const { filterShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
 
@@ -157,6 +159,9 @@ const InteractiveMap = ({ eventData }) => {
             data={eventData}
             handleCenterChange={handleCenterChange}
           />
+        )}
+        {filterShown && (
+            <FilterWindow></FilterWindow>
         )}
       </div>
     </>

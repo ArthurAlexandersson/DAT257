@@ -18,6 +18,7 @@ export const headerContext = createContext();
 function App() {
   const [isDarkModeState, setDarkModeState] = useState(false);
   const [leaderboardShown, setLeaderboardShown] = useState(false);
+  const [filterShown, setFilterShown] = useState(false);
   const [firetipsPopupShown, setFiretipsPopupShown] = useState(false);
 
   //Content in this file has been moved to Home.js in pages folder!!!
@@ -34,6 +35,8 @@ function App() {
             value={{
               leaderboardShown,
               setLeaderboardShown,
+              filterShown,
+              setFilterShown,
               firetipsPopupShown,
               setFiretipsPopupShown,
             }}
