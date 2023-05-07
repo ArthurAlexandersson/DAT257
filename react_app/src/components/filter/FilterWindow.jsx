@@ -19,6 +19,11 @@ const FilterWindow = ({filterData}) => {
         filterData(year, newMonth, region)
     };
 
+    const handleChangeRegion = (newRegion) => {
+        setRegion(newRegion.value)
+        filterData(year, month, newRegion.value)
+    };
+
     return (
         <div className="filter">
             <h2>Filter</h2>
@@ -26,7 +31,7 @@ const FilterWindow = ({filterData}) => {
                 <div className="filter-item">
                     <Slider
                         value={year}
-                        onChange={handleChangeYear}
+                        onAfterChange={handleChangeYear}
                         className="filter-slider"
                         thumbClassName="thumb"
                         trackClassName="track"
@@ -39,7 +44,7 @@ const FilterWindow = ({filterData}) => {
                 <div className="filter-item">
                     <Slider
                         value={month}
-                        onChange={handleChangeMonth}
+                        onAfterChange={handleChangeMonth}
                         className="filter-slider"
                         thumbClassName="thumb"
                         trackClassName="track"
@@ -56,8 +61,8 @@ const FilterWindow = ({filterData}) => {
 
                         className="region_box"
                         options={dropDownPopulation}
-                        menuPlacement="top"
-                        //onChange={handleChangeRegion}
+                        menuPlacement="bottom"
+                        onChange={handleChangeRegion}
                     />
                 </div>
 

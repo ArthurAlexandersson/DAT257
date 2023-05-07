@@ -32,6 +32,9 @@ const InteractiveMap = ({ eventData }) => {
       setSelectedEvent(event);
     }
   };
+  const filterData = (year, month, region) => {
+    console.log(year + " " + month + " " + region)
+  };
 
   const handleInfoClose = () => {
     setSelectedEvent(null);
@@ -161,7 +164,8 @@ const InteractiveMap = ({ eventData }) => {
           />
         )}
         {filterShown && (
-            <FilterWindow></FilterWindow>
+            <FilterWindow filterData={filterData}
+            ></FilterWindow >
         )}
       </div>
     </>
