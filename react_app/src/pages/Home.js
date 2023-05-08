@@ -17,7 +17,8 @@ function Home(){
             */
 
             /* setEventData(events); */
-            setEventData(fireData);
+            let filteredData = fireData.filter(obj => obj.acq_date.includes("-01-"));
+            setEventData(filteredData);
             setLoadingData(false);
         };
 

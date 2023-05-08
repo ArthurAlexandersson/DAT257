@@ -16,22 +16,38 @@ import { darkModeContext, headerContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
+import FilterWindow from "../filter/FilterWindow";
+import {filter} from "../filter/Filtering";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
   const { leaderboardShown } = useContext(headerContext);
+  const { filterShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
+  const [markerKey, setMarkerKey] = useState(0);
+  const [shownData, setShownData] = useState(eventData);
 
+  function clearMarkers() {
+    setMarkerKey(markerKey + 1);
+    closeInfo();
+  }
+  
   const toggleInfoOnMarkerClick = (event) => {
     if (event === selectedEvent) {
-      setSelectedEvent(null);
+      closeInfo();
     } else {
       setSelectedEvent(event);
     }
   };
+  const filterData = (year, month, region) => {
+    clearMarkers();
+    console.log(year + " " + month + " " + region)
+    let newData = filter(year, month, region);
+    setShownData(newData)
+  };
 
-  const handleInfoClose = () => {
+  const closeInfo = () => {
     setSelectedEvent(null);
   };
 
@@ -56,9 +72,10 @@ const InteractiveMap = ({ eventData }) => {
       width: 40,
     },
   ];
-  const slicedArray = eventData.slice(0, 10000);
+
   const fireMarkers = (
     <MarkerClusterer
+      key={markerKey}
       styles={clusterStyles}
       options={{
         gridSize: 50,
@@ -66,7 +83,7 @@ const InteractiveMap = ({ eventData }) => {
       }}
     >
       {(clusterer) =>
-        slicedArray.map((event, index) => {
+        shownData.map((event, index) => {
           const color = `rgb(255, ${
             (parseFloat(event.brightness - 300) / 90) * 100
           }, 0`;
@@ -149,7 +166,7 @@ const InteractiveMap = ({ eventData }) => {
           {fireMarkers}
           <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
-            <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
+            <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
           )}
         </GoogleMap>
         {leaderboardShown && (
@@ -157,6 +174,10 @@ const InteractiveMap = ({ eventData }) => {
             data={eventData}
             handleCenterChange={handleCenterChange}
           />
+        )}
+        {filterShown && (
+            <FilterWindow filterData={filterData}
+            />
         )}
       </div>
     </>
