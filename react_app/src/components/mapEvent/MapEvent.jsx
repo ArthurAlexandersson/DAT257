@@ -2,10 +2,6 @@ import React, { useRef, useContext, useCallback } from "react";
 import { Circle, MarkerF, useGoogleMap } from "@react-google-maps/api";
 import { mapStateContext } from "../map/InteractiveMap";
 
-const MemoizedMarker = React.memo(({ position, onClick }) => {
-  return <MarkerF position={position} onClick={onClick} />;
-});
-
 const MapEvent = React.memo(
   ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
     const { mapState, setMapState } = useContext(mapStateContext);
@@ -17,8 +13,8 @@ const MapEvent = React.memo(
           },
    */
 
-    const targetZoom = 13;
-    const animationDuration = 1000;
+    const targetZoom = 14;
+    const animationDuration = 500;
     const position = { lat, lng };
 
     const map = useGoogleMap();
@@ -27,9 +23,8 @@ const MapEvent = React.memo(
       return start + t * (end - start);
     };
 
-    const animateZoomAndPan = (map, targetPosition, targetZoom, duration) => {
+    const animateZoomAndPan = (map, targetZoom, duration) => {
       const startZoom = map.getZoom();
-      const startPosition = map.getCenter();
       const startTime = performance.now();
 
       const step = (timestamp) => {
@@ -37,11 +32,9 @@ const MapEvent = React.memo(
         const t = Math.min(elapsed / duration, 1);
 
         const currentZoom = lerp(startZoom, targetZoom, t);
-        const currentLat = lerp(startPosition.lat(), targetPosition.lat, t);
-        const currentLng = lerp(startPosition.lng(), targetPosition.lng, t);
 
         map.setZoom(currentZoom);
-        map.setCenter({ lat: currentLat, lng: currentLng });
+        //map.setCenter({ lat: currentLat, lng: currentLng });
 
         if (t < 1) {
           requestAnimationFrame(step);
@@ -53,7 +46,10 @@ const MapEvent = React.memo(
 
     const handleMarkerClick = () => {
       if (map) {
-        animateZoomAndPan(map, position, targetZoom, animationDuration);
+        map.panTo(position);
+        setTimeout(function () {
+          animateZoomAndPan(map, targetZoom, animationDuration);
+        }, 300);
       }
     };
 
