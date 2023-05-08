@@ -12,9 +12,9 @@ const LeaderboardIcon = () => {
       transform: "rotate(0deg)",
     },
     closed: {
-      transform: "rotate(360deg)",
+      transform: "rotate(10deg)",
     },
-    springConfig: { mass: 20, tension: 500, friction: 35 },
+    springConfig: { mass: 10, tension: 100, friction: 0 },
   };
 
   const iconPressed = () => {
