@@ -4,7 +4,7 @@ import { headerContext } from "../../App";
 import {animated, useSpring} from "react-spring";
 
 const FilterButton = () => {
-  const { filterShown, setFilterShown } = useContext(headerContext);
+  const { filterShown, setFilterShown, setLeaderboardShown } = useContext(headerContext);
   const [ filterToggled, setFilterToggled ] = useState(false);
 
   const iconPressed = () => {
@@ -38,6 +38,7 @@ const FilterButton = () => {
           onClick={() => {
             iconPressed();
             setFilterShown(!filterShown);
+            setLeaderboardShown(false);
           }}
       >
         <path

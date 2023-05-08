@@ -4,7 +4,7 @@ import "./header.css";
 import { headerContext } from "../../App";
 
 const LeaderboardIcon = () => {
-  const { leaderboardShown, setLeaderboardShown } = useContext(headerContext);
+  const { leaderboardShown, setLeaderboardShown, setFilterShown } = useContext(headerContext);
   const [isPressed, setPressed] = useState(false);
 
   const properties = {
@@ -41,6 +41,7 @@ const LeaderboardIcon = () => {
       onClick={() => {
         iconPressed();
         setLeaderboardShown(!leaderboardShown);
+        setFilterShown(false);
       }}
       style={{
         cursor: "pointer",

@@ -17,6 +17,7 @@ import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 import FilterWindow from "../filter/FilterWindow";
+import {filter} from "../filter/Filtering";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
@@ -34,7 +35,7 @@ const InteractiveMap = ({ eventData }) => {
   
   const toggleInfoOnMarkerClick = (event) => {
     if (event === selectedEvent) {
-      setSelectedEvent(null);
+      closeInfo();
     } else {
       setSelectedEvent(event);
     }
@@ -46,7 +47,7 @@ const InteractiveMap = ({ eventData }) => {
     setShownData(newData)
   };
 
-  const handleInfoClose = () => {
+  const closeInfo = () => {
     setSelectedEvent(null);
   };
 
@@ -82,7 +83,7 @@ const InteractiveMap = ({ eventData }) => {
       }}
     >
       {(clusterer) =>
-        slicedArray.map((event, index) => {
+        shownData.map((event, index) => {
           const color = `rgb(255, ${
             (parseFloat(event.brightness - 300) / 90) * 100
           }, 0`;
@@ -165,7 +166,7 @@ const InteractiveMap = ({ eventData }) => {
           {fireMarkers}
           <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
-            <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
+            <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
           )}
         </GoogleMap>
         {leaderboardShown && (
@@ -176,7 +177,7 @@ const InteractiveMap = ({ eventData }) => {
         )}
         {filterShown && (
             <FilterWindow filterData={filterData}
-            ></FilterWindow >
+            />
         )}
       </div>
     </>
