@@ -5,8 +5,11 @@ function Firetips() {
   const { firetipsPopupShown, setFiretipsPopupShown } =
     useContext(headerContext);
   return (
-    <div className="popup">
-      <div className="popup-inner">
+    <div
+      onClick={() => setFiretipsPopupShown(!firetipsPopupShown)}
+      className="popup"
+    >
+      <div onClick={(e) => e.stopPropagation()} className="popup-inner">
         <h3>Very fire tips</h3>
         <ol className="popup-list">
           <li>
