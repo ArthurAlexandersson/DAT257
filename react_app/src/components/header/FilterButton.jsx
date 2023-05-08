@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { animated, useSpring } from "react-spring";
+import { headerContext } from "../../App";
 
 const FilterButton = () => {
   const [pressed, setPressed] = useState(false);
