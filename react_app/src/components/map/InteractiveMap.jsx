@@ -24,7 +24,14 @@ const InteractiveMap = ({ eventData }) => {
   const { filterShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
+  const [markerKey, setMarkerKey] = useState(0);
+  const [shownData, setShownData] = useState(eventData);
 
+  function clearMarkers() {
+    setMarkerKey(markerKey + 1);
+    closeInfo();
+  }
+  
   const toggleInfoOnMarkerClick = (event) => {
     if (event === selectedEvent) {
       setSelectedEvent(null);
@@ -33,7 +40,10 @@ const InteractiveMap = ({ eventData }) => {
     }
   };
   const filterData = (year, month, region) => {
+    clearMarkers();
     console.log(year + " " + month + " " + region)
+    let newData = filter(year, month, region);
+    setShownData(newData)
   };
 
   const handleInfoClose = () => {
@@ -61,9 +71,10 @@ const InteractiveMap = ({ eventData }) => {
       width: 40,
     },
   ];
-  const slicedArray = eventData.slice(0, 10000);
+
   const fireMarkers = (
     <MarkerClusterer
+      key={markerKey}
       styles={clusterStyles}
       options={{
         gridSize: 50,
