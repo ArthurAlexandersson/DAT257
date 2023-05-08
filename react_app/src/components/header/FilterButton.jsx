@@ -3,6 +3,13 @@ import { animated, useSpring } from "react-spring";
 
 const FilterButton = () => {
   const [pressed, setPressed] = useState(false);
+  const { filterShown, setFilterShown, setLeaderboardShown } =
+    useContext(headerContext);
+  const [filterToggled, setFilterToggled] = useState(false);
+
+  const iconPressed = () => {
+    setFilterToggled((previous) => !previous);
+  };
 
   const { cx1, cy1, cx2, cy2 } = useSpring({
     cx1: pressed ? 8.5 : 15,
@@ -17,7 +24,12 @@ const FilterButton = () => {
       height="30px"
       viewBox="0 0 24 24"
       fill="none"
-      onClick={() => setPressed(!pressed)}
+      onClick={() => {
+        setPressed(!pressed);
+        iconPressed();
+        setFilterShown(!filterShown);
+        setLeaderboardShown(false);
+      }}
     >
       <animated.circle cx={cx1} cy={7} r="3.502" fill={color} />
       <animated.circle cx={cx2} cy={17} r="3.502" fill={color} />
