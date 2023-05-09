@@ -2,8 +2,6 @@ import fireData from "../../fireValues/fireData.js";
 
 
 export function filter (year, month, region) {
-    console.log("hello mister")
-    year = year.toString();
     const yearData = fireData[year];
     month = "-" + month + "-";
 

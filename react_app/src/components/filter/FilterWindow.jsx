@@ -34,12 +34,10 @@ const FilterWindow = ({filterData}) => {
             <h2>Filter</h2>
             <div className="filter-container">
                 <div className="filter-item">
-
                     <Select
                         value={dropDownYear.find(option => option.value === year)}
-
                         onChange={handleChangeYear}
-                        className="region_box"
+                        className="filter-box"
                         options = {dropDownYear}
                         styles={{
                             menu: (provided) => ({
@@ -69,7 +67,7 @@ const FilterWindow = ({filterData}) => {
                         value={dropDownMonth.find(option => option.value === month)}
 
                         onChange={handleChangeMonth}
-                        className="region_box"
+                        className="filter-box"
                         options={dropDownMonth}
                         styles={{
                             menu: (provided) => ({
@@ -98,7 +96,7 @@ const FilterWindow = ({filterData}) => {
                     <Select
                         defaultValue={dropDownRegion.find(option => option.value === region)}
 
-                        className="region_box"
+                        className="filter-box"
                         options={dropDownRegion}
                         menuPlacement="bottom"
                         onChange={handleChangeRegion}
