@@ -8,7 +8,7 @@ const FilterButton = () => {
     useContext(headerContext);
   const [filterToggled, setFilterToggled] = useState(false);
 
-  const { cx1 cx2} = useSpring({
+  const { cx1, cx2 } = useSpring({
     cx1: filterShown ? 8.5 : 15,
 
     cx2: filterShown ? 15 : 8.5,
