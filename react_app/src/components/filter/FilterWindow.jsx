@@ -1,22 +1,24 @@
 import React, {useState} from "react";
 import "./filterwindow.css"
-import Slider from "react-slider";
 import Select from "react-select";
-import dropDownPopulation from "./RegionValues";
+import dropDownRegion from "./RegionValues";
+import dropDownMonth from "./MonthValues";
+import dropDownYear from "./YearValues"
 
 const FilterWindow = ({filterData}) => {
-    const [year, setYear] = useState(2021);
-    const [month, setMonth] = useState(1);
+    const [year, setYear] = useState('2021');
+    const [month, setMonth] = useState('01');
     const [region, setRegion] = useState("Whole world");
 
     const handleChangeYear = (newYear) => {
-        setYear(newYear);
-        filterData(newYear, month, region);
+        setYear(newYear.value);
+        filterData(newYear.value, month, region);
     };
 
     const handleChangeMonth = (newMonth) => {
-        setMonth(newMonth)
-        filterData(year, newMonth, region)
+        setMonth(newMonth.value)
+        filterData(year, newMonth.value, region)
+        console.log(newMonth.value)
     };
 
     const handleChangeRegion = (newRegion) => {
@@ -24,45 +26,101 @@ const FilterWindow = ({filterData}) => {
         filterData(year, month, newRegion.value)
     };
 
+
+
+
     return (
         <div className="filter">
             <h2>Filter</h2>
             <div className="filter-container">
                 <div className="filter-item">
-                    <Slider
-                        value={year}
-                        onAfterChange={handleChangeYear}
-                        className="filter-slider"
-                        thumbClassName="thumb"
-                        trackClassName="track"
-                        ariaLabel={"Volume 1"}
-                        step={1}
-                        min={2000}
-                        max={2021}
+
+                    <Select
+                        value={dropDownYear.find(option => option.value === year)}
+
+                        onChange={handleChangeYear}
+                        className="region_box"
+                        options = {dropDownYear}
+                        styles={{
+                            menu: (provided) => ({
+                                ...provided,
+                                maxHeight: '200px',
+                                overflow: 'hidden',
+                                '&::-webkit-scrollbar': {
+                                    width: '5px',
+                                    height: '5px',
+                                },
+                                '&::-webkit-scrollbar-track': {
+                                    background: 'transparent',
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    background: 'gray',
+                                    borderRadius: '5px',
+                                },
+                            }),
+                        }}
+                        menuPosition={'fixed'}
                     />
+
                 </div>
                 <div className="filter-item">
-                    <Slider
-                        value={month}
-                        onAfterChange={handleChangeMonth}
-                        className="filter-slider"
-                        thumbClassName="thumb"
-                        trackClassName="track"
-                        ariaLabel={"Volume 2"}
-                        step={1}
-                        min={1}
-                        max={12}
+
+                    <Select
+                        value={dropDownMonth.find(option => option.value === month)}
+
+                        onChange={handleChangeMonth}
+                        className="region_box"
+                        options={dropDownMonth}
+                        styles={{
+                            menu: (provided) => ({
+                                ...provided,
+                                maxHeight: '200px',
+                                overflow: 'hidden',
+                                '&::-webkit-scrollbar': {
+                                    width: '5px',
+                                    height: '5px',
+                                },
+                                '&::-webkit-scrollbar-track': {
+                                    background: 'transparent',
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    background: 'gray',
+                                    borderRadius: '5px',
+                                },
+                            }),
+                        }}
+                        menuPosition={'fixed'}
                     />
+
                 </div>
 
                 <div className="filter-item">
                     <Select
-                        defaultValue={dropDownPopulation.find(option => option.value === region)}
+                        defaultValue={dropDownRegion.find(option => option.value === region)}
 
                         className="region_box"
-                        options={dropDownPopulation}
+                        options={dropDownRegion}
                         menuPlacement="bottom"
                         onChange={handleChangeRegion}
+                        styles={{
+                            menu: (provided) => ({
+                                ...provided,
+                                maxHeight: '200px',
+                                overflow: 'hidden',
+                                '&::-webkit-scrollbar': {
+                                    width: '5px',
+                                    height: '5px',
+                                },
+                                '&::-webkit-scrollbar-track': {
+                                    background: 'transparent',
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    background: 'gray',
+                                    borderRadius: '5px',
+                                },
+                            }),
+                        }}
+                        menuPosition={'fixed'}
                     />
                 </div>
 

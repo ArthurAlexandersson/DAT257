@@ -18,6 +18,7 @@ import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 import FilterWindow from "../filter/FilterWindow";
 import {filter} from "../filter/Filtering";
+import fireData from "../../fireValues/output.json";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
@@ -27,6 +28,14 @@ const InteractiveMap = ({ eventData }) => {
   const [mapStyles, setMapStyles] = useState([]);
   const [markerKey, setMarkerKey] = useState(0);
   const [shownData, setShownData] = useState(eventData);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setShownData(eventData)
+    };
+
+    fetchEvents();
+  }, [eventData]);
 
   function clearMarkers() {
     setMarkerKey(markerKey + 1);
