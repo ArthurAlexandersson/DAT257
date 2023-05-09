@@ -6,14 +6,10 @@ import { headerContext } from "../../App";
 const LeaderboardIcon = () => {
   const { leaderboardShown, setLeaderboardShown, setFilterShown } =
     useContext(headerContext);
-  const [isPressed, setPressed] = useState(false);
 
-  const iconPressed = () => {
-    setPressed((previous) => !previous);
-  };
   const { height, width } = useSpring({
-    height: isPressed ? 30 : 20,
-    width: isPressed ? 30 : 20,
+    height: leaderboardShown ? 30 : 20,
+    width: leaderboardShown ? 30 : 20,
   });
 
   return (
@@ -25,7 +21,6 @@ const LeaderboardIcon = () => {
       fill="#fff"
       onClick={() => {
         setLeaderboardShown(!leaderboardShown);
-        iconPressed();
       }}
     >
       <animated.rect
