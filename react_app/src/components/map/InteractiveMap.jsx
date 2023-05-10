@@ -224,6 +224,7 @@ const InteractiveMap = ({ eventData }) => {
             setFilteredMonth={setFilteredMonth}
             filteredRegion={filteredRegion}
             setFilteredRegion={setFilteredRegion}
+            handleCenterChange={handleCenterChange}
           />
         )}
         <CurrentFiltering
