@@ -14,23 +14,29 @@ import Firetips from "./popups/Firetips";
 
 export const darkModeContext = createContext();
 export const headerContext = createContext();
+export const searchContext = createContext();
 
 function App() {
   const [isDarkModeState, setDarkModeState] = useState(false);
   const [leaderboardShown, setLeaderboardShown] = useState(false);
   const [filterShown, setFilterShown] = useState(false);
   const [firetipsPopupShown, setFiretipsPopupShown] = useState(false);
+  const [locationState, setLocationState] = useState();
 
   //Content in this file has been moved to Home.js in pages folder!!!
   return (
     <div className="App">
       <Router>
+      <searchContext.Provider
+          value={{locationState, setLocationState}
+          }>
         <darkModeContext.Provider
           value={{
             isDarkModeState,
             setDarkModeState,
           }}
         >
+         
           <headerContext.Provider
             value={{
               leaderboardShown,
@@ -49,8 +55,10 @@ function App() {
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </headerContext.Provider>
+          
           <Footer />
         </darkModeContext.Provider>
+        </searchContext.Provider>
       </Router>
     </div>
   );

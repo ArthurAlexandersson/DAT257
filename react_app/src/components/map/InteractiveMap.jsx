@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useContext, useState } from "react";
+import React, { useEffect, useMemo, useContext, useState, useRef } from "react";
 import "./interactiveMap.css";
 import {
   GoogleMap,
@@ -13,20 +13,26 @@ import MapLoader from "../loader/MapLoader";
 import small from "./cluster_icons/small.png";
 import medium from "./cluster_icons/medium.png";
 import large from "./cluster_icons/large.png";
-import { darkModeContext, headerContext } from "../../App";
+import { darkModeContext, headerContext, searchContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 import { filter } from "../filter/Filtering";
+import axios from "axios";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
+  const { locationState } = useContext(searchContext);
   const { leaderboardShown } = useContext(headerContext);
   const { filterShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
   const [markerKey, setMarkerKey] = useState(0);
   const [shownData, setShownData] = useState(eventData);
+  const [searchBounds, setsearchBounds] = useState(["", "", "", ""]);
+  const [zoom, setzoom] = useState(12);
+
+  const mapRef = useRef(null);
 
   function clearMarkers() {
     setMarkerKey(markerKey + 1);
@@ -138,20 +144,62 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [isDarkModeState]);
 
+  //searchPlace
+  useEffect(() => {
+    if (locationState) {
+      (async () => {
+        try {
+          const response = await axios.get(
+            `https://geocode.maps.co/search?q=${encodeURIComponent(
+              locationState
+            )}`
+          );
+          const { lat, lon, boundingbox } = response.data[0];
+
+          setCenter({ lat: parseFloat(lat), lng: parseFloat(lon) });
+          setsearchBounds([
+            boundingbox[0],
+            boundingbox[1],
+            boundingbox[2],
+            boundingbox[3],
+          ]);
+          console.log(searchBounds);
+        } catch (error) {
+          console.error("Error fetching location coordinates:", error);
+        }
+      })();
+    }
+  }, [locationState]);
+
+  //Toggle leaderboard
+  useEffect(() => {
+    if (leaderboardShown) {
+      console.log("leaderboard is shown");
+    } else {
+      console.log("leaderboard is NOT shown");
+    }
+  }, [leaderboardShown]);
   const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
     <>
       <div style={{ height: mapHeight }} class="scrollable">
         <GoogleMap
+          ref={mapRef} // Add the ref to the GoogleMap component
           options={{
             ...OPTIONS,
             styles: mapStyles,
             disableDefaultUI: true,
             gestureHandling: "greedy",
           }}
-          zoom={12}
+          zoom={zoom}
           center={center}
+          fitBounds={{
+            south: searchBounds[0],
+            west: searchBounds[1],
+            north: searchBounds[2],
+            east: searchBounds[3],
+          }}
           mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
         >

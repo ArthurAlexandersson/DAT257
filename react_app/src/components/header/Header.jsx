@@ -7,6 +7,7 @@ import LogoSVG from "../../svg/logo.svg";
 import LeaderboardIcon from "./LeaderboardIcon";
 import { headerContext } from "../../App";
 import FilterButton from "./FilterButton";
+import SearchBar from "./SearchBar";
 
 function Header() {
   const { firetipsPopupShown, setFiretipsPopupShown } =
@@ -29,16 +30,7 @@ function Header() {
 
         <form class="form-inline">
           <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search"
-              aria-label="Search"
-            />
-
-            <button type="submit" class="btn btn-outline-secondary  ">
-              Search
-            </button>
+          <SearchBar/>
           </div>
         </form>
         <div className="collapse navbar-collapse" id="navBarNavMarkup">
