@@ -1,41 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./filterwindow.css";
 import Slider from "react-slider";
 import Select from "react-select";
 import dropDownPopulation from "./RegionValues";
 
-const FilterWindow = ({ filterData }) => {
-  const [year, setYear] = useState(
-    sessionStorage.getItem("year")
-      ? parseInt(sessionStorage.getItem("year"))
-      : 2021
-  );
-  const [month, setMonth] = useState(
-    sessionStorage.getItem("month")
-      ? parseInt(sessionStorage.getItem("month"))
-      : 1
-  );
-  const [region, setRegion] = useState(
-    sessionStorage.getItem("region") || "Whole world"
-  );
-
-  useEffect(() => {
-    filterData(year, month, region);
-    sessionStorage.setItem("year", year);
-    sessionStorage.setItem("month", month);
-    sessionStorage.setItem("region", region);
-  }, [year, month, region, filterData]);
+const FilterWindow = ({ filterData, shownData }) => {
+  const [year, setYear] = useState(2021);
+  const [month, setMonth] = useState(1);
+  const [region, setRegion] = useState(shownData.region);
 
   const handleChangeYear = (newYear) => {
     setYear(newYear);
+    filterData(newYear, month, region);
   };
 
   const handleChangeMonth = (newMonth) => {
     setMonth(newMonth);
+    filterData(year, newMonth, region);
   };
 
   const handleChangeRegion = (newRegion) => {
     setRegion(newRegion.value);
+    filterData(year, month, newRegion.value);
   };
 
   return (
@@ -85,4 +71,4 @@ const FilterWindow = ({ filterData }) => {
   );
 };
 
-export default FilterWindow;
+export default React.memo(FilterWindow);
