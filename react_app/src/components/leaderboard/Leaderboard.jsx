@@ -1,7 +1,7 @@
 import React from "react";
 import "./leaderboard.css";
 
-const Leaderboard = ({ data }) => {
+const Leaderboard = ({ data, handleCenterChange }) => {
   const quickSort = (arr, prop) => {
     if (arr.length <= 1) {
       return arr;
@@ -25,11 +25,19 @@ const Leaderboard = ({ data }) => {
   const sortedData = quickSort(data, "frp");
 
   const divs = sortedData.slice(0, 10).map((event) => (
-    <div className="event">
+    <div
+      className="event"
+      onClick={() => {
+        handleCenterChange({ lat: event.latitude, lng: event.longitude });
+      }}
+    >
       <p>
+        Region: {event.region}
+        <br />
         Longitude: {event.longitude} Latitude: {event.latitude}
+        <br />
+        frp: {event.frp}
       </p>
-      <p>frp: {event.frp}</p>
     </div>
   ));
 

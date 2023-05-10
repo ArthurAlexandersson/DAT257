@@ -1,7 +1,5 @@
-import React, { useRef, useContext, useCallback } from "react";
+import React, { useCallback } from "react";
 import { Circle, MarkerF, useGoogleMap } from "@react-google-maps/api";
-import { mapStateContext } from "../map/InteractiveMap";
-
 const MapEvent = React.memo(
   ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
     /**

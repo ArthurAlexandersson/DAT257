@@ -1,63 +1,60 @@
-import { useEffect, useState, createContext } from "react";
+import { useState, createContext } from "react";
 import "./App.css";
-import InteractiveMap from "./components/map/InteractiveMap";
-import MapLoader from "./components/loader/MapLoader";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import fireData from "./fireValues/output.json";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AboutUs from "./pages/AboutUs";
+import Home from "./pages/Home";
+import ErrorPage from "./pages/errorPage";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import Firetips from "./popups/Firetips";
 
 export const darkModeContext = createContext();
-export const leaderboardContext = createContext();
+export const headerContext = createContext();
+export const searchContext = createContext();
 
 function App() {
-  const [eventData, setEventData] = useState([]);
-  const [loadingData, setLoadingData] = useState(false);
   const [isDarkModeState, setDarkModeState] = useState(false);
   const [leaderboardShown, setLeaderboardShown] = useState(false);
+  const [filterShown, setFilterShown] = useState(false);
+  const [firetipsPopupShown, setFiretipsPopupShown] = useState(false);
+  const [locationState, setLocationState] = useState();
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      setLoadingData(true);
-      /*
-      const res = await fetch("https://eonet.gsfc.nasa.gov/api/v2.1/events");
-      const { events } = await res.json();
-      */
-
-      /* setEventData(events); */
-      setEventData(fireData);
-      setLoadingData(false);
-    };
-
-    fetchEvents();
-  }, []);
-
+  //Content in this file has been moved to Home.js in pages folder!!!
   return (
     <div className="App">
-      <darkModeContext.Provider
-        value={{
-          isDarkModeState,
-          setDarkModeState,
-        }}
-      >
-        <leaderboardContext.Provider
-          value={{
-            leaderboardShown,
-            setLeaderboardShown,
-          }}
-        >
-          <Header />
-          {!loadingData ? (
-            <InteractiveMap eventData={eventData} />
-          ) : (
-            <MapLoader />
-          )}
-          {/**
-            <Footer />
-           */}
-        </leaderboardContext.Provider>
-      </darkModeContext.Provider>
+      <Router>
+        <searchContext.Provider value={{ locationState, setLocationState }}>
+          <darkModeContext.Provider
+            value={{
+              isDarkModeState,
+              setDarkModeState,
+            }}
+          >
+            <headerContext.Provider
+              value={{
+                leaderboardShown,
+                setLeaderboardShown,
+                filterShown,
+                setFilterShown,
+                firetipsPopupShown,
+                setFiretipsPopupShown,
+              }}
+            >
+              {firetipsPopupShown && <Firetips />}
+              <Header />
+              <Routes>
+                <Route path="DAT257/" element={<Home />} />
+                <Route path="DAT257/aboutus" element={<AboutUs />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </headerContext.Provider>
+          </darkModeContext.Provider>
+        </searchContext.Provider>
+      </Router>
     </div>
   );
 }

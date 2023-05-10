@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useContext,
-  useState,
-  createContext,
-} from "react";
+import React, { useEffect, useMemo, useContext, useState, useRef } from "react";
 import "./interactiveMap.css";
 import {
   GoogleMap,
@@ -13,38 +7,66 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
+import FilterWindow from "../filter/FilterWindow";
 import MapEvent from "../mapEvent/MapEvent";
 import MapLoader from "../loader/MapLoader";
 import small from "./cluster_icons/small.png";
 import medium from "./cluster_icons/medium.png";
 import large from "./cluster_icons/large.png";
-import { darkModeContext, leaderboardContext } from "../../App";
+import { darkModeContext, headerContext, searchContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
+import { filter } from "../filter/Filtering";
+import axios from "axios";
+import CurrentFiltering from "../filter/CurrentFiltering";
 
 export const mapStateContext = createContext();
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
-  const { leaderboardShown } = useContext(leaderboardContext);
-
+  const { locationState } = useContext(searchContext);
+  const { leaderboardShown } = useContext(headerContext);
+  const { filterShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
-  const [mapState, setMapState] = useState({
-    center: { lat: 57.9, lng: 12.5 },
-    zoom: 12,
-  });
+  const [markerKey, setMarkerKey] = useState(0);
+  const [shownData, setShownData] = useState(eventData);
+  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredMonth, setFilteredMonth] = useState("01");
+  const [filteredRegion, setFilteredRegion] = useState("Whole world");
+  const [searchBounds, setsearchBounds] = useState(["", "", "", ""]);
+  const [zoom, setzoom] = useState(12);
+
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setShownData(eventData);
+    };
+
+    fetchEvents();
+  }, [eventData]);
+
+  function clearMarkers() {
+    setMarkerKey(markerKey + 1);
+    closeInfo();
+  }
 
   const toggleInfoOnMarkerClick = (event) => {
     if (event === selectedEvent) {
-      setSelectedEvent(null);
+      closeInfo();
     } else {
       setSelectedEvent(event);
     }
   };
+  const filterData = (year, month, region) => {
+    clearMarkers();
+    let newData = filter(year, month, region);
+    setShownData(newData);
+  };
 
-  const handleInfoClose = () => {
+  const closeInfo = () => {
     setSelectedEvent(null);
   };
 
@@ -69,9 +91,9 @@ const InteractiveMap = ({ eventData }) => {
       width: 40,
     },
   ];
-  const slicedArray = eventData.slice(0, 1000);
   const fireMarkers = (
     <MarkerClusterer
+      key={markerKey}
       styles={clusterStyles}
       options={{
         gridSize: 50,
@@ -79,7 +101,7 @@ const InteractiveMap = ({ eventData }) => {
       }}
     >
       {(clusterer) =>
-        slicedArray.map((event, index) => {
+        shownData.map((event, index) => {
           const color = `rgb(255, ${
             (parseFloat(event.brightness - 300) / 90) * 100
           }, 0`;
@@ -105,6 +127,8 @@ const InteractiveMap = ({ eventData }) => {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
   });
 
+  const [center, setCenter] = useState({ lat: 57.9, lng: 12.5 });
+
   const hermansHus = useMemo(
     () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
     []
@@ -118,6 +142,11 @@ const InteractiveMap = ({ eventData }) => {
     },
   };
 
+  // Change center
+  const handleCenterChange = (newCenter) => {
+    setCenter(newCenter);
+  };
+
   //Toggle darkmode
   useEffect(() => {
     if (isDarkModeState) {
@@ -127,30 +156,53 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [isDarkModeState]);
 
-  //Toggle leaderboard
+  //searchPlace
   useEffect(() => {
-    if (leaderboardShown) {
-      console.log("leaderboard is shown");
-    } else {
-      console.log("leaderboard is NOT shown");
-    }
-  }, [leaderboardShown]);
+    if (locationState) {
+      (async () => {
+        try {
+          const response = await axios.get(
+            `https://geocode.maps.co/search?q=${encodeURIComponent(
+              locationState
+            )}`
+          );
+          const { lat, lon, boundingbox } = response.data[0];
 
-  const mapHeight = `calc(100vh - 60px - 60px)`;
+          setCenter({ lat: parseFloat(lat), lng: parseFloat(lon) });
+          setsearchBounds([
+            boundingbox[0],
+            boundingbox[1],
+            boundingbox[2],
+            boundingbox[3],
+          ]);
+          console.log(searchBounds);
+        } catch (error) {
+          console.error("Error fetching location coordinates:", error);
+        }
+      })();
+    }
+  }, [locationState]);
+
   if (!isLoaded) return <MapLoader />;
   return (
     <>
-      <div style={{ height: mapHeight }} class="scrollable">
+      <div style={{ height: "100vh" }} class="scrollable">
         <GoogleMap
+          ref={mapRef} // Add the ref to the GoogleMap component
           options={{
             ...OPTIONS,
             styles: mapStyles,
             disableDefaultUI: true,
             gestureHandling: "greedy",
           }}
-          zoom={mapState.zoom}
-          center={mapState.center}
-          mapContainerStyle={{ height: "100%" }}
+          zoom={zoom}
+          center={center}
+          fitBounds={{
+            south: searchBounds[0],
+            west: searchBounds[1],
+            north: searchBounds[2],
+            east: searchBounds[3],
+          }}
           mapContainerClassName="map_container"
         >
           <mapStateContext.Provider value={{ mapState, setMapState }}>
@@ -158,10 +210,31 @@ const InteractiveMap = ({ eventData }) => {
           </mapStateContext.Provider>
           <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
-            <FireInfoWindow event={selectedEvent} onClose={handleInfoClose} />
+            <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
           )}
         </GoogleMap>
-        {leaderboardShown && <Leaderboard data={eventData} />}
+        {leaderboardShown && (
+          <Leaderboard
+            data={shownData}
+            handleCenterChange={handleCenterChange}
+          />
+        )}
+        {filterShown && (
+          <FilterWindow
+            filterData={filterData}
+            filteredYear={filteredYear}
+            setFilteredYear={setFilteredYear}
+            filteredMonth={filteredMonth}
+            setFilteredMonth={setFilteredMonth}
+            filteredRegion={filteredRegion}
+            setFilteredRegion={setFilteredRegion}
+          />
+        )}
+        <CurrentFiltering
+          year={filteredYear}
+          month={filteredMonth}
+          region={filteredRegion}
+        />
       </div>
     </>
   );

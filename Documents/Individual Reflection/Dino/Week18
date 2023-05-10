@@ -1,0 +1,12 @@
+Week 18:
+
+This week I have been continuing my work on the search function. It was interesting to get to know googles api a little better.
+The user story was a little bit to large to complete in a week, especially with the problems of last week regarding the map.
+This week I have focused mainly on being able to search for a country/region and it is working good. Therefore one of the issues are resolved. 
+I have successfully implemented googles autocomplete functionality in the searchbar. That is, when a user types in "swe", we call on the google api autocomplete,
+to give suggestions on what the user is searching for. So when a person types in "swe", the first exapmle it recieves is "Sweden". 
+
+Next week I will be focusing on tying the loose ends, that is finishing the search functionality in its entirety by implementing the paning of the map, 
+an fixing the last aesthetics/styling of the searchbar. What I could do better next week is setting up more realistic goals for each sprint. 
+
+Overall, it has been a productive week.

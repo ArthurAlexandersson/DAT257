@@ -1,0 +1,11 @@
+Sprint 4 
+Anton Börås
+
+Den här veckan har jag tillsammans med Benjamin fokuserat på att kunna filtrerar vilka bränder som visas.
+Tanken var från början att filrera på månad och år, men Omar gav oss också att han vill att det ska gå att filtrera på en region.
+Därför har vi fixat med funktionalitet för att filtrera på just de tre bränderna. Det gick bra i början, men i slutet av veckan så 
+stötte vi på problem när vi skulle interagera vår lösning med en omstrukturering av koden. Det problemet återstår till nästa vecka att lösa.
+
+Utöver mitt och Benjamins lilla problem så har projektet flutit på bra även denna vecka. Vi har bra samarbete och bra sturktur på vårt upplägg.
+
+Nästa vecka blir som sagt fokuset att lösa det problemet som uppstod i slutet av veckan.

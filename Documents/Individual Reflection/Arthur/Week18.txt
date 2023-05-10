@@ -1,0 +1,15 @@
+##Week 18##
+Denna weekly-reflection blev på engelska :) 
+
+For this week I mostly worked on the popup-window which displays some tips on how to prevent fires
+and what to do in case of a fire. Working with this I encountered some issues. For example how to 
+link the different functionality between files, such as opening and closing the view, aswell as how to 
+make it look like a popup which is placed above everything else. I figured out how to fix all this and 
+it was satisfying to see it all work in the end. 
+
+I also worked on implementing functionality which centeres the map when pressing a fire in the priority 
+view. This was also quite challenging, but I at last got it to work somewhat smoothly, there're still some
+issues where the center is somewhat missplaced. 
+
+For the next week I plan to work more on the aesthetics of the website. I'm also going to be helping out with
+the filtering and search functionality. 
