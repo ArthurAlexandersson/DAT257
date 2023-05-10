@@ -64,7 +64,6 @@ const NightModeIcon = () => {
         setDarkModeState(!isDarkModeState);
       }}
       style={{
-        cursor: "pointer",
         ...svgContainerProps,
       }}
     >
