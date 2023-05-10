@@ -1,42 +1,77 @@
-import { Circle, MarkerF } from "@react-google-maps/api";
+import React, { useCallback } from "react";
+import { Circle, MarkerF, useGoogleMap } from "@react-google-maps/api";
+const MapEvent = React.memo(
+  ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
+    const position = { lat, lng };
 
-const MapEvent = ({
-  lat,
-  lng,
-  radius,
-  color,
-  toggleInfo,
-  event,
-  selected,
-  clusterer,
-}) => {
-  if (selected === event) {
+    const map = useGoogleMap();
+
+    const zoom = function () {
+      if (map) {
+        let currentZoom = map.getZoom();
+        let currentStep = 0;
+
+        const targetZoom = 13; // the desired zoom level
+        const interval = 300; // how often to change the zoom level
+        const steps = targetZoom - currentZoom;
+        console.log(steps);
+        const stepChange = 1.5;
+
+        const zoomInterval = setInterval(() => {
+          if (currentStep < steps) {
+            currentZoom += stepChange;
+            // If currentZoom exceeds targetZoom, set it to targetZoom
+            if (currentZoom > targetZoom) {
+              currentZoom = targetZoom;
+              currentStep = steps;
+            }
+            map.setZoom(currentZoom);
+            currentStep++;
+          } else {
+            clearInterval(zoomInterval);
+          }
+        }, interval);
+      }
+    };
+
+    const handleMarkerClick = () => {
+      if (map) {
+        zoom();
+        map.panTo(position);
+      }
+    };
+
+    const onClick = useCallback(() => {
+      toggleInfo(event);
+      handleMarkerClick(lat, lng);
+    }, []);
+
+    if (selected === event) {
+      return (
+        <Circle
+          center={{ lat: lat, lng: lng }}
+          radius={radius}
+          options={{ fillColor: color, strokeColor: color }}
+          onClick={() => {
+            toggleInfo(event);
+          }}
+        ></Circle>
+      );
+    }
     return (
-      <Circle
-        center={{ lat: lat, lng: lng }}
-        radius={radius}
-        options={{ fillColor: color, strokeColor: color }}
-        onClick={() => {
-          toggleInfo(event);
+      <MarkerF
+        position={{ lat: lat, lng: lng }}
+        onClick={onClick}
+        //This label is need in order to ensure correct shape of symbol :(
+        label={""}
+        icon={{
+          url: require("./fire.svg").default,
+          scaledSize: { width: 30, height: 30 },
         }}
-      ></Circle>
+        clusterer={clusterer}
+      ></MarkerF>
     );
   }
-  return (
-    <MarkerF
-      position={{ lat: lat, lng: lng }}
-      onClick={() => {
-        toggleInfo(event);
-      }}
-      //This label is need in order to ensure correct shape of symbol :(
-      label={""}
-      icon={{
-        url: require("./fire.svg").default,
-        scaledSize: { width: 30, height: 30 },
-      }}
-      clusterer={clusterer}
-    ></MarkerF>
-  );
-};
+);
 
 export default MapEvent;

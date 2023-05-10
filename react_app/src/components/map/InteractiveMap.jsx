@@ -89,7 +89,6 @@ const InteractiveMap = ({ eventData }) => {
       width: 40,
     },
   ];
-
   const fireMarkers = (
     <MarkerClusterer
       key={markerKey}
