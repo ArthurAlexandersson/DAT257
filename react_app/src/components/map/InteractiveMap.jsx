@@ -48,7 +48,6 @@ const InteractiveMap = ({ eventData }) => {
   };
   const filterData = (year, month, region) => {
     clearMarkers();
-    console.log(year + " " + month + " " + region);
     let newData = filter(year, month, region);
     setShownData(newData);
   };
@@ -171,14 +170,6 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [locationState]);
 
-  //Toggle leaderboard
-  useEffect(() => {
-    if (leaderboardShown) {
-      console.log("leaderboard is shown");
-    } else {
-      console.log("leaderboard is NOT shown");
-    }
-  }, [leaderboardShown]);
   const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
