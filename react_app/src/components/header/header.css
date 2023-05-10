@@ -11,7 +11,18 @@
 .leaderboardIcon {
   margin: 10px;
 }
-
-.leaderboardIcon {
+.leaderboardIcon:hover {
+  cursor: pointer;
+}
+.nightModeIcon {
   margin: 10px;
+}
+.nightModeIcon:hover {
+  cursor: pointer;
+}
+.filterButton {
+  margin: 10px;
+}
+.filterButton:hover {
+  cursor: pointer;
 }

@@ -7,6 +7,7 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import FireInfoWindow from "../infowindow/FireInfoWindow";
+import FilterWindow from "../filter/FilterWindow";
 import MapEvent from "../mapEvent/MapEvent";
 import MapLoader from "../loader/MapLoader";
 import small from "./cluster_icons/small.png";
@@ -16,8 +17,7 @@ import { darkModeContext, headerContext, searchContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
-import FilterWindow from "../filter/FilterWindow";
-import {filter} from "../filter/Filtering";
+import { filter } from "../filter/Filtering";
 import axios from 'axios';
 
 const InteractiveMap = ({ eventData }) => {
@@ -39,7 +39,7 @@ const InteractiveMap = ({ eventData }) => {
     setMarkerKey(markerKey + 1);
     closeInfo();
   }
-  
+
   const toggleInfoOnMarkerClick = (event) => {
     if (event === selectedEvent) {
       closeInfo();
@@ -49,9 +49,9 @@ const InteractiveMap = ({ eventData }) => {
   };
   const filterData = (year, month, region) => {
     clearMarkers();
-    console.log(year + " " + month + " " + region)
+    console.log(year + " " + month + " " + region);
     let newData = filter(year, month, region);
-    setShownData(newData)
+    setShownData(newData);
   };
 
   const closeInfo = () => {
@@ -198,14 +198,11 @@ const InteractiveMap = ({ eventData }) => {
         </GoogleMap>
         {leaderboardShown && (
           <Leaderboard
-            data={eventData}
+            data={shownData}
             handleCenterChange={handleCenterChange}
           />
         )}
-        {filterShown && (
-            <FilterWindow filterData={filterData}
-            />
-        )}
+        {filterShown && <FilterWindow filterData={filterData} />}
       </div>
     </>
   );

@@ -1,33 +1,28 @@
 import React, { useState, useContext } from "react";
 import { animated, useSpring } from "react-spring";
 import { headerContext } from "../../App";
+import "./header.css";
 
 const FilterButton = () => {
-  const [pressed, setPressed] = useState(false);
   const { filterShown, setFilterShown, setLeaderboardShown } =
     useContext(headerContext);
   const [filterToggled, setFilterToggled] = useState(false);
 
-  const iconPressed = () => {
-    setFilterToggled((previous) => !previous);
-  };
+  const { cx1, cx2 } = useSpring({
+    cx1: filterShown ? 8.5 : 15,
 
-  const { cx1, cy1, cx2, cy2 } = useSpring({
-    cx1: pressed ? 8.5 : 15,
-
-    cx2: pressed ? 15 : 8.5,
+    cx2: filterShown ? 15 : 8.5,
   });
   const color = "#fff";
 
   return (
     <animated.svg
+      className={"filterButton"}
       width="30px"
       height="30px"
       viewBox="0 0 24 24"
       fill="none"
       onClick={() => {
-        setPressed(!pressed);
-        iconPressed();
         setFilterShown(!filterShown);
         setLeaderboardShown(false);
       }}
