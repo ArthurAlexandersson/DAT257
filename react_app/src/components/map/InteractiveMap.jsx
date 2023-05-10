@@ -39,12 +39,11 @@ const InteractiveMap = ({ eventData }) => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setShownData(eventData)
+      setShownData(eventData);
     };
 
     fetchEvents();
   }, [eventData]);
-
 
   function clearMarkers() {
     setMarkerKey(markerKey + 1);
@@ -182,15 +181,7 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [locationState]);
 
-  //Toggle leaderboard
-  useEffect(() => {
-    if (leaderboardShown) {
-      console.log("leaderboard is shown");
-    } else {
-      console.log("leaderboard is NOT shown");
-    }
-  }, [leaderboardShown]);
-  const mapHeight = `calc(99vh - 60px)`;
+  const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
     <>
@@ -227,15 +218,15 @@ const InteractiveMap = ({ eventData }) => {
           />
         )}
         {filterShown && (
-            <FilterWindow
-                filterData={filterData}
-                filteredYear={filteredYear}
-                setFilteredYear={setFilteredYear}
-                filteredMonth={filteredMonth}
-                setFilteredMonth={setFilteredMonth}
-                filteredRegion={filteredRegion}
-                setFilteredRegion={setFilteredRegion}
-            />
+          <FilterWindow
+            filterData={filterData}
+            filteredYear={filteredYear}
+            setFilteredYear={setFilteredYear}
+            filteredMonth={filteredMonth}
+            setFilteredMonth={setFilteredMonth}
+            filteredRegion={filteredRegion}
+            setFilteredRegion={setFilteredRegion}
+          />
         )}
       </div>
     </>
