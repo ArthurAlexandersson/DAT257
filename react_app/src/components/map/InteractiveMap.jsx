@@ -18,7 +18,6 @@ import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 import FilterWindow from "../filter/FilterWindow";
 import {filter} from "../filter/Filtering";
-import fireData from "../../fireValues/output.json";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
@@ -28,6 +27,9 @@ const InteractiveMap = ({ eventData }) => {
   const [mapStyles, setMapStyles] = useState([]);
   const [markerKey, setMarkerKey] = useState(0);
   const [shownData, setShownData] = useState(eventData);
+  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredMonth, setFilteredMonth] = useState("01");
+  const [filteredRegion, setFilteredRegion] = useState("Whole world");
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -49,6 +51,7 @@ const InteractiveMap = ({ eventData }) => {
       setSelectedEvent(event);
     }
   };
+  //TODO make states for year, month and region here and pass to filter window when opening it
   const filterData = (year, month, region) => {
     clearMarkers();
     console.log(year + " " + month + " " + region)
@@ -185,7 +188,14 @@ const InteractiveMap = ({ eventData }) => {
           />
         )}
         {filterShown && (
-            <FilterWindow filterData={filterData}
+            <FilterWindow
+                filterData={filterData}
+                filteredYear={filteredYear}
+                setFilteredYear={setFilteredYear}
+                filteredMonth={filteredMonth}
+                setFilteredMonth={setFilteredMonth}
+                filteredRegion={filteredRegion}
+                setFilteredRegion={setFilteredRegion}
             />
         )}
       </div>

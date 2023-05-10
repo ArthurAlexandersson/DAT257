@@ -5,24 +5,27 @@ import dropDownRegion from "./RegionValues";
 import dropDownMonth from "./MonthValues";
 import dropDownYear from "./YearValues"
 
-const FilterWindow = ({filterData}) => {
-    const [year, setYear] = useState('2021');
-    const [month, setMonth] = useState('01');
-    const [region, setRegion] = useState("Whole world");
+const FilterWindow = ({filterData, filteredYear, setFilteredYear, filteredMonth, setFilteredMonth, filteredRegion, setFilteredRegion }) => {
+    const [year, setYear] = useState(filteredYear);
+    const [month, setMonth] = useState(filteredMonth);
+    const [region, setRegion] = useState(filteredRegion);
+
 
     const handleChangeYear = (newYear) => {
         setYear(newYear.value);
+        setFilteredYear(newYear.value);
         filterData(newYear.value, month, region);
     };
 
     const handleChangeMonth = (newMonth) => {
         setMonth(newMonth.value)
+        setFilteredMonth(newMonth.value)
         filterData(year, newMonth.value, region)
-        console.log(newMonth.value)
     };
 
     const handleChangeRegion = (newRegion) => {
         setRegion(newRegion.value)
+        setFilteredRegion(newRegion.value)
         filterData(year, month, newRegion.value)
     };
 
@@ -31,9 +34,10 @@ const FilterWindow = ({filterData}) => {
 
     return (
         <div className="filter">
-            <h2>Filter</h2>
+            <h2 className="h2">Filter</h2>
             <div className="filter-container">
                 <div className="filter-item">
+                    <p className="p">Year</p>
                     <Select
                         value={dropDownYear.find(option => option.value === year)}
                         onChange={handleChangeYear}
@@ -62,7 +66,7 @@ const FilterWindow = ({filterData}) => {
 
                 </div>
                 <div className="filter-item">
-
+                    <p className="p">Month</p>
                     <Select
                         value={dropDownMonth.find(option => option.value === month)}
 
@@ -93,6 +97,7 @@ const FilterWindow = ({filterData}) => {
                 </div>
 
                 <div className="filter-item">
+                    <p className="p">Region</p>
                     <Select
                         defaultValue={dropDownRegion.find(option => option.value === region)}
 
