@@ -6,7 +6,7 @@ const MapEvent = React.memo(
 
     const map = useGoogleMap();
 
-    const zoom = function () {
+    const zoomToMarker = function () {
       if (map) {
         let currentZoom = map.getZoom();
         let currentStep = 0;
@@ -36,7 +36,7 @@ const MapEvent = React.memo(
 
     const handleMarkerClick = () => {
       if (map) {
-        zoom();
+        zoomToMarker();
         map.panTo(position);
       }
     };
