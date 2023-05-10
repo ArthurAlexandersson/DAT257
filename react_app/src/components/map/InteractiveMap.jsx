@@ -21,8 +21,6 @@ import { filter } from "../filter/Filtering";
 import axios from "axios";
 import CurrentFiltering from "../filter/CurrentFiltering";
 
-export const mapStateContext = createContext();
-
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
   const { locationState } = useContext(searchContext);
@@ -205,9 +203,7 @@ const InteractiveMap = ({ eventData }) => {
           }}
           mapContainerClassName="map_container"
         >
-          <mapStateContext.Provider value={{ mapState, setMapState }}>
-            {fireMarkers}
-          </mapStateContext.Provider>
+          {fireMarkers}
           <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
           {selectedEvent && (
             <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
