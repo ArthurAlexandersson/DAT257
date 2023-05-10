@@ -2,13 +2,6 @@ import React, { useCallback } from "react";
 import { Circle, MarkerF, useGoogleMap } from "@react-google-maps/api";
 const MapEvent = React.memo(
   ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
-    /**
-   *      center: {
-            lat: lat,
-            lng: lng,
-          },
-   */
-
     const position = { lat, lng };
 
     const map = useGoogleMap();
@@ -19,7 +12,6 @@ const MapEvent = React.memo(
         let currentStep = 0;
 
         const targetZoom = 13; // the desired zoom level
-        const duration = 750; // duration of the zoom effect in ms
         const interval = 300; // how often to change the zoom level
         const steps = targetZoom - currentZoom;
         console.log(steps);
