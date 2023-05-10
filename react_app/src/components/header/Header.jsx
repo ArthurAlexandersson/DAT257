@@ -43,9 +43,13 @@ function Header() {
         </form>
         <div className="collapse navbar-collapse" id="navBarNavMarkup">
           <ul class="navbar-nav">
-            <a class="nav-item nav-link active" href="#home">
+            <Link to={"/DAT257/"} className={"nav-item nav-link active"}>
               Home
-            </a>
+            </Link>
+            <Link to={"DAT257/aboutus"} className={"nav-item nav-link active"}>
+              About Us
+            </Link>
+
             <a
               class="nav-item nav-link info"
               onClick={() => {
