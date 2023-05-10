@@ -138,14 +138,6 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [isDarkModeState]);
 
-  //Toggle leaderboard
-  useEffect(() => {
-    if (leaderboardShown) {
-      console.log("leaderboard is shown");
-    } else {
-      console.log("leaderboard is NOT shown");
-    }
-  }, [leaderboardShown]);
   const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
@@ -175,7 +167,9 @@ const InteractiveMap = ({ eventData }) => {
             handleCenterChange={handleCenterChange}
           />
         )}
-        {filterShown && <FilterWindow filterData={filterData} />}
+        {filterShown && (
+          <FilterWindow filterData={filterData} shownData={shownData} />
+        )}
       </div>
     </>
   );
