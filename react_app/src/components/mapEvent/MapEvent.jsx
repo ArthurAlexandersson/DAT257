@@ -4,8 +4,6 @@ import { mapStateContext } from "../map/InteractiveMap";
 
 const MapEvent = React.memo(
   ({ lat, lng, radius, color, toggleInfo, event, selected, clusterer }) => {
-    const { mapState, setMapState } = useContext(mapStateContext);
-
     /**
    *      center: {
             lat: lat,
@@ -13,43 +11,43 @@ const MapEvent = React.memo(
           },
    */
 
-    const targetZoom = 14;
-    const animationDuration = 500;
     const position = { lat, lng };
 
     const map = useGoogleMap();
 
-    const lerp = (start, end, t) => {
-      return start + t * (end - start);
-    };
+    const zoom = function () {
+      if (map) {
+        let currentZoom = map.getZoom();
+        let currentStep = 0;
 
-    const animateZoomAndPan = (map, targetZoom, duration) => {
-      const startZoom = map.getZoom();
-      const startTime = performance.now();
+        const targetZoom = 13; // the desired zoom level
+        const duration = 750; // duration of the zoom effect in ms
+        const interval = 300; // how often to change the zoom level
+        const steps = targetZoom - currentZoom;
+        console.log(steps);
+        const stepChange = 1.5;
 
-      const step = (timestamp) => {
-        const elapsed = timestamp - startTime;
-        const t = Math.min(elapsed / duration, 1);
-
-        const currentZoom = lerp(startZoom, targetZoom, t);
-
-        map.setZoom(currentZoom);
-        //map.setCenter({ lat: currentLat, lng: currentLng });
-
-        if (t < 1) {
-          requestAnimationFrame(step);
-        }
-      };
-
-      requestAnimationFrame(step);
+        const zoomInterval = setInterval(() => {
+          if (currentStep < steps) {
+            currentZoom += stepChange;
+            // If currentZoom exceeds targetZoom, set it to targetZoom
+            if (currentZoom > targetZoom) {
+              currentZoom = targetZoom;
+              currentStep = steps;
+            }
+            map.setZoom(currentZoom);
+            currentStep++;
+          } else {
+            clearInterval(zoomInterval);
+          }
+        }, interval);
+      }
     };
 
     const handleMarkerClick = () => {
       if (map) {
+        zoom();
         map.panTo(position);
-        setTimeout(function () {
-          animateZoomAndPan(map, targetZoom, animationDuration);
-        }, 300);
       }
     };
 
