@@ -21,6 +21,7 @@ const LeaderboardIcon = () => {
       fill="#fff"
       onClick={() => {
         setLeaderboardShown(!leaderboardShown);
+        setFilterShown(false)
       }}
     >
       <animated.rect
