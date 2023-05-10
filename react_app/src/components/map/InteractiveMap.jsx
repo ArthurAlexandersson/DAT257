@@ -29,10 +29,22 @@ const InteractiveMap = ({ eventData }) => {
   const [mapStyles, setMapStyles] = useState([]);
   const [markerKey, setMarkerKey] = useState(0);
   const [shownData, setShownData] = useState(eventData);
+  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredMonth, setFilteredMonth] = useState("01");
+  const [filteredRegion, setFilteredRegion] = useState("Whole world");
   const [searchBounds, setsearchBounds] = useState(["", "", "", ""]);
   const [zoom, setzoom] = useState(12);
 
   const mapRef = useRef(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setShownData(eventData)
+    };
+
+    fetchEvents();
+  }, [eventData]);
+
 
   function clearMarkers() {
     setMarkerKey(markerKey + 1);
@@ -48,7 +60,6 @@ const InteractiveMap = ({ eventData }) => {
   };
   const filterData = (year, month, region) => {
     clearMarkers();
-    console.log(year + " " + month + " " + region);
     let newData = filter(year, month, region);
     setShownData(newData);
   };
@@ -216,7 +227,15 @@ const InteractiveMap = ({ eventData }) => {
           />
         )}
         {filterShown && (
-          <FilterWindow filterData={filterData} shownData={shownData} />
+            <FilterWindow
+                filterData={filterData}
+                filteredYear={filteredYear}
+                setFilteredYear={setFilteredYear}
+                filteredMonth={filteredMonth}
+                setFilteredMonth={setFilteredMonth}
+                filteredRegion={filteredRegion}
+                setFilteredRegion={setFilteredRegion}
+            />
         )}
       </div>
     </>

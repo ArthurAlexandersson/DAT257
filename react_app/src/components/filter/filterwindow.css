@@ -1,50 +1,34 @@
-.filter{
+.filter {
     position: absolute;
     overflow-y: auto;
     top: 65px;
     right: 0;
-    width: 300px;
+    width: 225px;
     max-height: 300px;
     background-color: var(--mainDark);
     border-radius: 0 0 0 1em;
     z-index: 1;
 }
-h2 {
+
+.h2 {
     position: sticky;
     color: white;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     text-align: center;
     top: 0;
     background-color: var(--mainDark);
-    padding-bottom: 0.5em;
+    padding-bottom: 0;
 }
-.filter-container{
+
+.filter-container {
     display: flex;
     flex-direction: column;
 }
-.filter-item{
-    margin: 20px;
+.filter-box {
+    margin: 0 15px 10px 15px;
 }
-.filter-slider {
-    width: 250px;
-    height: 20px;
-    z-index: 5;
-}
-.thumb {
-    height: 30px;
-    width: 20px;
-    background-color: #000;
-    border-radius: 3px;
-    cursor: grab;
-    border: none;
-}
-
-.thumb:active {
-    cursor: grabbing;
-}
-
-.track {
-    border-radius: 3px;
-    height: 30px;
-    background-color: #fff;
+.p {
+    margin:0 15px 10px 15px;
+    height: 15px;
+    color: white;
 }

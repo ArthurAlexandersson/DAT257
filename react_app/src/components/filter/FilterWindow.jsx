@@ -1,74 +1,135 @@
-import React, { useState } from "react";
-import "./filterwindow.css";
-import Slider from "react-slider";
+import React, {useState} from "react";
+import "./filterwindow.css"
 import Select from "react-select";
-import dropDownPopulation from "./RegionValues";
+import dropDownRegion from "./RegionValues";
+import dropDownMonth from "./MonthValues";
+import dropDownYear from "./YearValues"
 
-const FilterWindow = ({ filterData, shownData }) => {
-  const [year, setYear] = useState(2021);
-  const [month, setMonth] = useState(1);
-  const [region, setRegion] = useState(shownData.region);
+const FilterWindow = ({filterData, filteredYear, setFilteredYear, filteredMonth, setFilteredMonth, filteredRegion, setFilteredRegion }) => {
+    const [year, setYear] = useState(filteredYear);
+    const [month, setMonth] = useState(filteredMonth);
+    const [region, setRegion] = useState(filteredRegion);
 
-  const handleChangeYear = (newYear) => {
-    setYear(newYear);
-    filterData(newYear, month, region);
-  };
 
-  const handleChangeMonth = (newMonth) => {
-    setMonth(newMonth);
-    filterData(year, newMonth, region);
-  };
+    const handleChangeYear = (newYear) => {
+        setYear(newYear.value);
+        setFilteredYear(newYear.value);
+        filterData(newYear.value, month, region);
+    };
 
-  const handleChangeRegion = (newRegion) => {
-    setRegion(newRegion.value);
-    filterData(year, month, newRegion.value);
-  };
+    const handleChangeMonth = (newMonth) => {
+        setMonth(newMonth.value)
+        setFilteredMonth(newMonth.value)
+        filterData(year, newMonth.value, region)
+    };
 
-  return (
-    <div className="filter">
-      <h2>Filter</h2>
-      <div className="filter-container">
-        <div className="filter-item">
-          <Slider
-            value={year}
-            onAfterChange={handleChangeYear}
-            className="filter-slider"
-            thumbClassName="thumb"
-            trackClassName="track"
-            ariaLabel={"Volume 1"}
-            step={1}
-            min={2000}
-            max={2021}
-          />
+    const handleChangeRegion = (newRegion) => {
+        setRegion(newRegion.value)
+        setFilteredRegion(newRegion.value)
+        filterData(year, month, newRegion.value)
+    };
+
+
+
+
+    return (
+        <div className="filter">
+            <h2 className="h2">Filter</h2>
+            <div className="filter-container">
+                <div className="filter-item">
+                    <p className="p">Year</p>
+                    <Select
+                        value={dropDownYear.find(option => option.value === year)}
+                        onChange={handleChangeYear}
+                        className="filter-box"
+                        options = {dropDownYear}
+                        styles={{
+                            menu: (provided) => ({
+                                ...provided,
+                                maxHeight: '200px',
+                                overflow: 'hidden',
+                                '&::-webkit-scrollbar': {
+                                    width: '5px',
+                                    height: '5px',
+                                },
+                                '&::-webkit-scrollbar-track': {
+                                    background: 'transparent',
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    background: 'gray',
+                                    borderRadius: '5px',
+                                },
+                            }),
+                        }}
+                        menuPosition={'fixed'}
+                    />
+
+                </div>
+                <div className="filter-item">
+                    <p className="p">Month</p>
+                    <Select
+                        value={dropDownMonth.find(option => option.value === month)}
+
+                        onChange={handleChangeMonth}
+                        className="filter-box"
+                        options={dropDownMonth}
+                        styles={{
+                            menu: (provided) => ({
+                                ...provided,
+                                maxHeight: '200px',
+                                overflow: 'hidden',
+                                '&::-webkit-scrollbar': {
+                                    width: '5px',
+                                    height: '5px',
+                                },
+                                '&::-webkit-scrollbar-track': {
+                                    background: 'transparent',
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    background: 'gray',
+                                    borderRadius: '5px',
+                                },
+                            }),
+                        }}
+                        menuPosition={'fixed'}
+                    />
+
+                </div>
+
+                <div className="filter-item">
+                    <p className="p">Region</p>
+                    <Select
+                        defaultValue={dropDownRegion.find(option => option.value === region)}
+
+                        className="filter-box"
+                        options={dropDownRegion}
+                        menuPlacement="bottom"
+                        onChange={handleChangeRegion}
+                        styles={{
+                            menu: (provided) => ({
+                                ...provided,
+                                maxHeight: '200px',
+                                overflow: 'hidden',
+                                '&::-webkit-scrollbar': {
+                                    width: '5px',
+                                    height: '5px',
+                                },
+                                '&::-webkit-scrollbar-track': {
+                                    background: 'transparent',
+                                },
+                                '&::-webkit-scrollbar-thumb': {
+                                    background: 'gray',
+                                    borderRadius: '5px',
+                                },
+                            }),
+                        }}
+                        menuPosition={'fixed'}
+                    />
+                </div>
+
+            </div>
         </div>
-        <div className="filter-item">
-          <Slider
-            value={month}
-            onAfterChange={handleChangeMonth}
-            className="filter-slider"
-            thumbClassName="thumb"
-            trackClassName="track"
-            ariaLabel={"Volume 2"}
-            step={1}
-            min={1}
-            max={12}
-          />
-        </div>
-
-        <div className="filter-item">
-          <Select
-            defaultValue={dropDownPopulation.find(
-              (option) => option.value === region
-            )}
-            className="region_box"
-            options={dropDownPopulation}
-            menuPlacement="bottom"
-            onChange={handleChangeRegion}
-          />
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default React.memo(FilterWindow);
+export default FilterWindow;
