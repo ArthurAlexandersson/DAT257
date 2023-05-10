@@ -1,25 +1,36 @@
 import * as React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import {Container, Row, Col, Navbar} from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
+import Logo2SVG from "../../svg/logo_2.svg";
 
 const FooterContainer = styled.footer`
   .footer-middle {
     background: var(--mainDark);
-    padding-top: 2em;
+    padding-top: 1em;
     color: var(--mainWhite);
   }
 
   .footer-bottom {
-    padding-top: 2em;
-    padding-bottom: 1em;
+    padding-bottom: 8px;
+    text-align: center;
+    font-size: smaller;
   }
   ul li a {
-    color: var(--mainGrey);
+    color: white;
   }
   ul li a:hover {
     color: var(--mainLightGrey);
   }
+  .footer-content{
+    display: flex;
+    justify-content: space-between;
+  }
+  .footer-logo{
+    font-size: 28px;
+    
+  }
+  
 `;
 
 function Footer() {
@@ -27,74 +38,28 @@ function Footer() {
     <FooterContainer className="main-footer">
       <div className="footer-middle">
         <Container>
-          <Row>
-            {/* Column 1 */}
-            <Col>
-              <h4>smthn smthn</h4>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="#feature">yee yee </a>
-                </li>
-                <li>
-                  <a href="/test">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-              </ul>
-            </Col>
-            {/* Column 2 */}
-            <Col>
-              <h4>smthn smthn</h4>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-              </ul>
-            </Col>
-            {/* Column 3 */}
-            <Col>
-              <h4>smthn smthn</h4>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-                <li>
-                  <a href="/">yee yee </a>
-                </li>
-              </ul>
-            </Col>
-            {/* Column 4 */}
-            <Col>
-              <h4>About us</h4>
-              <ul className="list-unstyled">
-                <li>
-                  <Link to="/DAT257/aboutus">About Us</Link>
-                </li>
-                <li>
-                  <Link to="/DAT257/">Home / Map</Link>
-                </li>
-              </ul>
-            </Col>
-          </Row>
+          <div className={'footer-content'}>
+            <Row>
+              <Col>
+                <ul className="list-unstyled">
+                  <li>
+                    <Link to="/DAT257/aboutus">About Us</Link>
+                  </li>
+                </ul>
+              </Col>
+            </Row>
+
+            <div className={'footer-logo'}>
+                <img
+                    alt=""
+                    src={Logo2SVG}
+                    width="40px"
+                    height="40px"
+                    className="d-inline-block align-top"
+                />{" "}
+                FireWatcher
+            </div>
+          </div>
           {/* Footer Bottom */}
           <div className="footer-bottom">
             <p className="text-xs-center">

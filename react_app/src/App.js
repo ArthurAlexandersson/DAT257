@@ -55,8 +55,6 @@ function App() {
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </headerContext.Provider>
-          
-          <Footer />
         </darkModeContext.Provider>
         </searchContext.Provider>
       </Router>
