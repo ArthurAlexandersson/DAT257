@@ -27,35 +27,32 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <searchContext.Provider
-          value={{locationState, setLocationState}
-          }>
-        <darkModeContext.Provider
-          value={{
-            isDarkModeState,
-            setDarkModeState,
-          }}
-        >
-         
-          <headerContext.Provider
+        <searchContext.Provider value={{ locationState, setLocationState }}>
+          <darkModeContext.Provider
             value={{
-              leaderboardShown,
-              setLeaderboardShown,
-              filterShown,
-              setFilterShown,
-              firetipsPopupShown,
-              setFiretipsPopupShown,
+              isDarkModeState,
+              setDarkModeState,
             }}
           >
-            {firetipsPopupShown && <Firetips />}
-            <Header />
-            <Routes>
-              <Route path="DAT257/" element={<Home />} />
-              <Route path="DAT257/aboutus" element={<AboutUs />} />
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </headerContext.Provider>
-        </darkModeContext.Provider>
+            <headerContext.Provider
+              value={{
+                leaderboardShown,
+                setLeaderboardShown,
+                filterShown,
+                setFilterShown,
+                firetipsPopupShown,
+                setFiretipsPopupShown,
+              }}
+            >
+              {firetipsPopupShown && <Firetips />}
+              <Header />
+              <Routes>
+                <Route path="DAT257/" element={<Home />} />
+                <Route path="DAT257/aboutus" element={<AboutUs />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </headerContext.Provider>
+          </darkModeContext.Provider>
         </searchContext.Provider>
       </Router>
     </div>

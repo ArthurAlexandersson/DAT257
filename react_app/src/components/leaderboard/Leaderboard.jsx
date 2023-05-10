@@ -32,9 +32,12 @@ const Leaderboard = ({ data, handleCenterChange }) => {
       }}
     >
       <p>
+        Region: {event.region}
+        <br />
         Longitude: {event.longitude} Latitude: {event.latitude}
+        <br />
+        frp: {event.frp}
       </p>
-      <p>frp: {event.frp}</p>
     </div>
   ));
 

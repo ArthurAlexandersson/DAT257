@@ -40,12 +40,11 @@ const InteractiveMap = ({ eventData }) => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      setShownData(eventData)
+      setShownData(eventData);
     };
 
     fetchEvents();
   }, [eventData]);
-
 
   function clearMarkers() {
     setMarkerKey(markerKey + 1);
@@ -183,19 +182,10 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [locationState]);
 
-  //Toggle leaderboard
-  useEffect(() => {
-    if (leaderboardShown) {
-      console.log("leaderboard is shown");
-    } else {
-      console.log("leaderboard is NOT shown");
-    }
-  }, [leaderboardShown]);
-  const mapHeight = `calc(99vh - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
     <>
-      <div style={{ height: mapHeight }} class="scrollable">
+      <div style={{ height: "100vh" }} class="scrollable">
         <GoogleMap
           ref={mapRef} // Add the ref to the GoogleMap component
           options={{
@@ -212,7 +202,6 @@ const InteractiveMap = ({ eventData }) => {
             north: searchBounds[2],
             east: searchBounds[3],
           }}
-          mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
         >
           {fireMarkers}
@@ -228,15 +217,15 @@ const InteractiveMap = ({ eventData }) => {
           />
         )}
         {filterShown && (
-            <FilterWindow
-                filterData={filterData}
-                filteredYear={filteredYear}
-                setFilteredYear={setFilteredYear}
-                filteredMonth={filteredMonth}
-                setFilteredMonth={setFilteredMonth}
-                filteredRegion={filteredRegion}
-                setFilteredRegion={setFilteredRegion}
-            />
+          <FilterWindow
+            filterData={filterData}
+            filteredYear={filteredYear}
+            setFilteredYear={setFilteredYear}
+            filteredMonth={filteredMonth}
+            setFilteredMonth={setFilteredMonth}
+            filteredRegion={filteredRegion}
+            setFilteredRegion={setFilteredRegion}
+          />
         )}
         <CurrentFiltering
           year={filteredYear}
