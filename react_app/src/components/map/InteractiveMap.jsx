@@ -179,7 +179,7 @@ const InteractiveMap = ({ eventData }) => {
       console.log("leaderboard is NOT shown");
     }
   }, [leaderboardShown]);
-  const mapHeight = `calc(100vh - 60px - 60px)`;
+  const mapHeight = `calc(99vh - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
     <>
