@@ -7,7 +7,7 @@ import Logo2SVG from "../../svg/logo_2.svg";
 const FooterContainer = styled.footer`
   .footer-middle {
     background: var(--mainDark);
-    padding-top: 3em;
+    padding-top: 1em;
     color: var(--mainWhite);
   }
 
@@ -40,8 +40,6 @@ function Footer() {
         <Container>
           <div className={'footer-content'}>
             <Row>
-
-              {/* Column 4 */}
               <Col>
                 <ul className="list-unstyled">
                   <li>
