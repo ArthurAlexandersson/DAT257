@@ -181,11 +181,10 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [locationState]);
 
-  const mapHeight = `calc(100vh - 60px - 60px)`;
   if (!isLoaded) return <MapLoader />;
   return (
     <>
-      <div style={{ height: mapHeight }} class="scrollable">
+      <div style={{ height: "100vh" }} class="scrollable">
         <GoogleMap
           ref={mapRef} // Add the ref to the GoogleMap component
           options={{
@@ -202,7 +201,6 @@ const InteractiveMap = ({ eventData }) => {
             north: searchBounds[2],
             east: searchBounds[3],
           }}
-          mapContainerStyle={{ height: "100%" }}
           mapContainerClassName="map_container"
         >
           {fireMarkers}

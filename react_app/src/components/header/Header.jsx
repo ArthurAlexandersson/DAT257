@@ -13,7 +13,15 @@ function Header() {
   const { firetipsPopupShown, setFiretipsPopupShown } =
     useContext(headerContext);
   return (
-    <Navbar style={{ backgroundColor: "var(--mainDark)" }} variant="dark">
+    <Navbar
+      style={{
+        backgroundColor: "var(--mainDark)",
+        position: "fixed",
+        zIndex: "999",
+        width: "100%",
+      }}
+      variant="dark"
+    >
       <div className="container-fluid">
         <Link to={"/DAT257/"} style={{ textDecoration: "none" }}>
           <Navbar.Brand>
@@ -30,7 +38,7 @@ function Header() {
 
         <form class="form-inline">
           <div class="input-group">
-          <SearchBar/>
+            <SearchBar />
           </div>
         </form>
         <div className="collapse navbar-collapse" id="navBarNavMarkup">

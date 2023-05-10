@@ -2,25 +2,28 @@
   cursor: pointer;
 }
 .leaderboardIcon {
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .leaderboardIcon:hover {
   cursor: pointer;
 }
 .nightModeIcon {
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .nightModeIcon:hover {
   cursor: pointer;
 }
 .filterButton {
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .filterButton:hover {
   cursor: pointer;
 }
 .filterButton {
-  margin: 10px;
+  margin-left: 10px;
 }
 .filterButton:hover {
   cursor: pointer;
