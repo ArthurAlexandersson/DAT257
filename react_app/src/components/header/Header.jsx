@@ -19,6 +19,7 @@ function Header() {
         position: "fixed",
         zIndex: "999",
         width: "100%",
+        top: 0,
       }}
       variant="dark"
     >

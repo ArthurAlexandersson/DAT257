@@ -7,7 +7,7 @@ function AboutUs() {
         <Container className="about-us-container">
             <Row className="justify-content-center">
                 <Col lg={8}>
-                    <h1 className="text-center mb-5">About Us</h1>
+                    <h1 className={"text-center mb-5"}>About Us</h1>
                     <p>
                         Welcome to FireWatcher! We are a team of dedicated professionals who are passionate about providing accurate and timely information on wildfires around the world. Our mission is to help raise awareness and improve the response to these natural disasters.
                     </p>
