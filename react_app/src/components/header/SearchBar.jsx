@@ -1,40 +1,45 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { searchContext } from "../../App";
 
 const SearchBar = () => {
-  const {locationState, setLocationState} = useContext(searchContext);
+  const { locationState, setLocationState } = useContext(searchContext);
   const [location, setLocation] = useState();
 
   const handleLocationChange = (event) => {
-    setLocation(event.target.value)
-};
+    setLocation(event.target.value);
+  };
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  setLocationState(location);
-};
-const handleClick = () => {
-  setLocationState(location);
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLocationState(location);
+  };
+  const handleClick = () => {
+    setLocationState(location);
+  };
 
   return (
     <form onSubmit={handleSubmit} onkeydown={handleClick}>
-    <div class="input-group" onkeydown={handleClick}>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Search"
-      aria-label="Search"
-     onChange={handleLocationChange}
-     onkeydown={handleClick}
-     tabIndex={0}
-    />
+      <div class="input-group" onkeydown={handleClick}>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          aria-label="Search"
+          onChange={handleLocationChange}
+          onkeydown={handleClick}
+          tabIndex={0}
+        />
 
-  <button type="button" class="btn btn-outline-secondary  " id = "btnSearch"  onClick={handleClick}>
-      Search
-    </button>
-  </div>
-  </form>
+        <button
+          type="button"
+          class="btn btn-outline-secondary  "
+          id="btnSearch"
+          onClick={handleClick}
+        >
+          Search
+        </button>
+      </div>
+    </form>
   );
 };
 export default SearchBar;

@@ -208,13 +208,20 @@ const InteractiveMap = ({ eventData }) => {
           {selectedEvent && (
             <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
           )}
-        </GoogleMap>
-        {leaderboardShown && (
-          <Leaderboard
-            data={shownData}
-            handleCenterChange={handleCenterChange}
+          <CurrentFiltering
+            year={filteredYear}
+            month={filteredMonth}
+            region={filteredRegion}
           />
-        )}
+          {leaderboardShown && (
+            <Leaderboard
+              data={shownData}
+              handleCenterChange={handleCenterChange}
+              toggleInfo={toggleInfoOnMarkerClick}
+            />
+          )}
+        </GoogleMap>
+
         {filterShown && (
           <FilterWindow
             filterData={filterData}
@@ -227,11 +234,6 @@ const InteractiveMap = ({ eventData }) => {
             handleCenterChange={handleCenterChange}
           />
         )}
-        <CurrentFiltering
-          year={filteredYear}
-          month={filteredMonth}
-          region={filteredRegion}
-        />
       </div>
     </>
   );

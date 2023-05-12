@@ -1,7 +1,34 @@
 import React from "react";
 import "./leaderboard.css";
+import { useGoogleMap } from "@react-google-maps/api";
+const Leaderboard = React.memo(({ data, handleCenterChange, toggleInfo }) => {
+  const map = useGoogleMap();
+  const zoom = function (targetZoom) {
+    if (map) {
+      let currentZoom = map.getZoom();
+      let currentStep = 0;
 
-const Leaderboard = ({ data, handleCenterChange }) => {
+      const interval = 300; // how often to change the zoom level
+      const steps = targetZoom - currentZoom;
+      console.log(steps);
+      const stepChange = 1.5;
+
+      const zoomInterval = setInterval(() => {
+        if (currentStep < steps) {
+          currentZoom += stepChange;
+          // If currentZoom exceeds targetZoom, set it to targetZoom
+          if (currentZoom > targetZoom) {
+            currentZoom = targetZoom;
+            currentStep = steps;
+          }
+          map.setZoom(currentZoom);
+          currentStep++;
+        } else {
+          clearInterval(zoomInterval);
+        }
+      }, interval);
+    }
+  };
   const quickSort = (arr, prop) => {
     if (arr.length <= 1) {
       return arr;
@@ -29,6 +56,8 @@ const Leaderboard = ({ data, handleCenterChange }) => {
       className="event"
       onClick={() => {
         handleCenterChange({ lat: event.latitude, lng: event.longitude });
+        toggleInfo(event);
+        zoom(12);
       }}
     >
       <p>
@@ -47,6 +76,6 @@ const Leaderboard = ({ data, handleCenterChange }) => {
       {divs}
     </div>
   );
-};
+});
 
 export default Leaderboard;

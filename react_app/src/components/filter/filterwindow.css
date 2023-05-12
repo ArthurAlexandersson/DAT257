@@ -1,14 +1,13 @@
 .filter {
-    position: absolute;
-    overflow-y: auto;
-    top: 55px;
-    right: 0;
-    width: 225px;
-    max-height: 300px;
-    background-color: var(--mainDark);
-    border-radius: 0 0 0 1em;
-    z-index: 2;
-
+  position: absolute;
+  overflow-y: auto;
+  top: 55px;
+  right: 0;
+  width: 230px;
+  max-height: 300px;
+  background-color: var(--mainDark);
+  border-radius: 0 0 0 1em;
+  z-index: 2;
 }
 
 .h2 {

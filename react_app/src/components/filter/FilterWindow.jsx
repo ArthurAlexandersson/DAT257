@@ -61,7 +61,7 @@ const FilterWindow = ({
             styles={{
               menu: (provided) => ({
                 ...provided,
-                maxHeight: "200px",
+
                 overflow: "hidden",
                 "&::-webkit-scrollbar": {
                   width: "5px",
@@ -89,7 +89,7 @@ const FilterWindow = ({
             styles={{
               menu: (provided) => ({
                 ...provided,
-                maxHeight: "200px",
+
                 overflow: "hidden",
                 "&::-webkit-scrollbar": {
                   width: "5px",
@@ -121,7 +121,7 @@ const FilterWindow = ({
             styles={{
               menu: (provided) => ({
                 ...provided,
-                maxHeight: "200px",
+
                 overflow: "hidden",
                 "&::-webkit-scrollbar": {
                   width: "5px",
