@@ -1,0 +1,12 @@
+Sprint 5 
+Anton Börås
+
+Den här veckan löste vi först problemet som kvarstod sedan förra veckan gälland filtreringen. Vi lyckades till slut fixa så att eldarna filtrerades utan större fördröjning
+och integrerade lösningen i den omstrukturerade koden. Den här veckan har mitt fokus tillsammans med Benjamin varit att fixa styling på filtreringsrutan. 
+Tillsammans i teamet konstaterade vi att sliders var icke intuitivt att använda för att filtrera år och månad, så därför fixade vi att alla tre kategorier filtrerades
+med hjälp av comboboxes. Utöver det har vi i teamet utvecklat projektet mycket den här veckan och vi börjar se en produkt som är redo för en "lansering" i slutet av nästa vecka.
+
+Vårt arbete tillsammans i teamet fungerar fortsatt bra och vi har utvecklat tydliga rutiner som hjälper oss i vårt arbete. Angående att det agila arbetssättet känns naturligt
+så skulle jag säga att vi har fått bra koll på hur vi ska använda oss av det för att få ut så mycket som möjligt på ett effektivt sätt.
+
+Nästa vecka så återstår att städa upp vårt repository och fixa de sista små detaljerna i vårt projekt.
