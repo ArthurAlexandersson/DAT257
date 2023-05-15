@@ -1,0 +1,11 @@
+##WEEK19##
+Denna vecka jobbade jag främst med att animera ikoner, fixa till filtrering, zoomning när man klickar
+på en eld i priolistan. Det som var svårast denna vecka var att fixa zoomningen, men även hur vi skulle 
+lösa filtreringen, främst hur man skulle få värdena att sparas när man stänger filterrutan. Detta löstes
+genom att skicka med värdena till filterrutan. Innan denna lösning försökte vi använda oss av "sessionStorage"
+men detta var för krävande och gjorde att applikationen laggade. 
+
+Inför nästa vecka planerar jag/vi att arbeta med videon, samt att färdiställa applikationen och rensa 
+på github. 
+
+Jag, som scrum master, tycker att gruppen arbetar på bra, det är bra sammarbete och kommunikation. 

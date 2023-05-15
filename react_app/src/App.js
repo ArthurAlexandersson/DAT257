@@ -14,43 +14,46 @@ import Firetips from "./popups/Firetips";
 
 export const darkModeContext = createContext();
 export const headerContext = createContext();
+export const searchContext = createContext();
 
 function App() {
   const [isDarkModeState, setDarkModeState] = useState(false);
   const [leaderboardShown, setLeaderboardShown] = useState(false);
   const [filterShown, setFilterShown] = useState(false);
   const [firetipsPopupShown, setFiretipsPopupShown] = useState(false);
+  const [locationState, setLocationState] = useState();
 
   //Content in this file has been moved to Home.js in pages folder!!!
   return (
     <div className="App">
       <Router>
-        <darkModeContext.Provider
-          value={{
-            isDarkModeState,
-            setDarkModeState,
-          }}
-        >
-          <headerContext.Provider
+        <searchContext.Provider value={{ locationState, setLocationState }}>
+          <darkModeContext.Provider
             value={{
-              leaderboardShown,
-              setLeaderboardShown,
-              filterShown,
-              setFilterShown,
-              firetipsPopupShown,
-              setFiretipsPopupShown,
+              isDarkModeState,
+              setDarkModeState,
             }}
           >
-            {firetipsPopupShown && <Firetips />}
-            <Header />
-            <Routes>
-              <Route path="DAT257/" element={<Home />} />
-              <Route path="DAT257/aboutus" element={<AboutUs />} />
-              <Route path="*" element={<ErrorPage />} />
-            </Routes>
-          </headerContext.Provider>
-          <Footer />
-        </darkModeContext.Provider>
+            <headerContext.Provider
+              value={{
+                leaderboardShown,
+                setLeaderboardShown,
+                filterShown,
+                setFilterShown,
+                firetipsPopupShown,
+                setFiretipsPopupShown,
+              }}
+            >
+              {firetipsPopupShown && <Firetips />}
+              <Header />
+              <Routes>
+                <Route path="DAT257/" element={<Home />} />
+                <Route path="DAT257/aboutus" element={<AboutUs />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Routes>
+            </headerContext.Provider>
+          </darkModeContext.Provider>
+        </searchContext.Provider>
       </Router>
     </div>
   );

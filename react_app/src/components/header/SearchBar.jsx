@@ -1,25 +1,45 @@
-import React from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { searchContext } from "../../App";
 
 const SearchBar = () => {
+  const { locationState, setLocationState } = useContext(searchContext);
+  const [location, setLocation] = useState();
+
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLocationState(location);
+  };
+  const handleClick = () => {
+    setLocationState(location);
+  };
+
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col sm={4}>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2 rounded-pill"
-              aria-label="Search"
-            />
-            <Button className="rounded-pill" variant="outline-primary">
-              Search
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <form onSubmit={handleSubmit} onkeydown={handleClick}>
+      <div class="input-group" onkeydown={handleClick}>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          aria-label="Search"
+          onChange={handleLocationChange}
+          onkeydown={handleClick}
+          tabIndex={0}
+        />
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary  "
+          id="btnSearch"
+          onClick={handleClick}
+        >
+          Search
+        </button>
+      </div>
+    </form>
   );
 };
 export default SearchBar;

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useContext, useState } from "react";
+import React, { useEffect, useMemo, useContext, useState, useRef } from "react";
 import "./interactiveMap.css";
 import {
   GoogleMap,
@@ -13,20 +13,38 @@ import MapLoader from "../loader/MapLoader";
 import small from "./cluster_icons/small.png";
 import medium from "./cluster_icons/medium.png";
 import large from "./cluster_icons/large.png";
-import { darkModeContext, headerContext } from "../../App";
+import { darkModeContext, headerContext, searchContext } from "../../App";
 import darkModeStyle from "./mapStyles/darkModeMapStyle.js";
 import mapStyle from "./mapStyles/mapStyle.js";
 import Leaderboard from "../leaderboard/Leaderboard";
 import { filter } from "../filter/Filtering";
+import axios from "axios";
+import CurrentFiltering from "../filter/CurrentFiltering";
 
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
+  const { locationState } = useContext(searchContext);
   const { leaderboardShown } = useContext(headerContext);
   const { filterShown } = useContext(headerContext);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [mapStyles, setMapStyles] = useState([]);
   const [markerKey, setMarkerKey] = useState(0);
   const [shownData, setShownData] = useState(eventData);
+  const [filteredYear, setFilteredYear] = useState("2021");
+  const [filteredMonth, setFilteredMonth] = useState("01");
+  const [filteredRegion, setFilteredRegion] = useState("Whole world");
+  const [searchBounds, setsearchBounds] = useState(["", "", "", ""]);
+  const [zoom, setzoom] = useState(12);
+
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      setShownData(eventData);
+    };
+
+    fetchEvents();
+  }, [eventData]);
 
   function clearMarkers() {
     setMarkerKey(markerKey + 1);
@@ -42,7 +60,6 @@ const InteractiveMap = ({ eventData }) => {
   };
   const filterData = (year, month, region) => {
     clearMarkers();
-    console.log(year + " " + month + " " + region);
     let newData = filter(year, month, region);
     setShownData(newData);
   };
@@ -72,7 +89,6 @@ const InteractiveMap = ({ eventData }) => {
       width: 40,
     },
   ];
-
   const fireMarkers = (
     <MarkerClusterer
       key={markerKey}
@@ -138,29 +154,53 @@ const InteractiveMap = ({ eventData }) => {
     }
   }, [isDarkModeState]);
 
-  //Toggle leaderboard
+  //searchPlace
   useEffect(() => {
-    if (leaderboardShown) {
-      console.log("leaderboard is shown");
-    } else {
-      console.log("leaderboard is NOT shown");
+    if (locationState) {
+      (async () => {
+        try {
+          const response = await axios.get(
+            `https://geocode.maps.co/search?q=${encodeURIComponent(
+              locationState
+            )}`
+          );
+          const { lat, lon, boundingbox } = response.data[0];
+
+          setCenter({ lat: parseFloat(lat), lng: parseFloat(lon) });
+          setsearchBounds([
+            boundingbox[0],
+            boundingbox[1],
+            boundingbox[2],
+            boundingbox[3],
+          ]);
+          console.log(searchBounds);
+        } catch (error) {
+          console.error("Error fetching location coordinates:", error);
+        }
+      })();
     }
-  }, [leaderboardShown]);
-  const mapHeight = `calc(100vh - 60px - 60px)`;
+  }, [locationState]);
+
   if (!isLoaded) return <MapLoader />;
   return (
     <>
-      <div style={{ height: mapHeight }} class="scrollable">
+      <div style={{ height: "100vh" }} class="scrollable">
         <GoogleMap
+          ref={mapRef} // Add the ref to the GoogleMap component
           options={{
             ...OPTIONS,
             styles: mapStyles,
             disableDefaultUI: true,
             gestureHandling: "greedy",
           }}
-          zoom={12}
+          zoom={zoom}
           center={center}
-          mapContainerStyle={{ height: "100%" }}
+          fitBounds={{
+            south: searchBounds[0],
+            west: searchBounds[1],
+            north: searchBounds[2],
+            east: searchBounds[3],
+          }}
           mapContainerClassName="map_container"
         >
           {fireMarkers}
@@ -168,14 +208,32 @@ const InteractiveMap = ({ eventData }) => {
           {selectedEvent && (
             <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
           )}
+          <CurrentFiltering
+            year={filteredYear}
+            month={filteredMonth}
+            region={filteredRegion}
+          />
+          {leaderboardShown && (
+            <Leaderboard
+              data={shownData}
+              handleCenterChange={handleCenterChange}
+              toggleInfo={toggleInfoOnMarkerClick}
+            />
+          )}
         </GoogleMap>
-        {leaderboardShown && (
-          <Leaderboard
-            data={shownData}
+
+        {filterShown && (
+          <FilterWindow
+            filterData={filterData}
+            filteredYear={filteredYear}
+            setFilteredYear={setFilteredYear}
+            filteredMonth={filteredMonth}
+            setFilteredMonth={setFilteredMonth}
+            filteredRegion={filteredRegion}
+            setFilteredRegion={setFilteredRegion}
             handleCenterChange={handleCenterChange}
           />
         )}
-        {filterShown && <FilterWindow filterData={filterData} />}
       </div>
     </>
   );

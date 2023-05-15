@@ -1,0 +1,12 @@
+Week 19 individual report:
+
+This week we finalized the project. We have finally finished the search bar and its functionality. 
+It was a bit tiresome of a task mainly because the google autocomplete and map apis did not work well together.
+Instead we looked into other options and luckily we found something called geocode which was made it a lot easier to implement 
+the funcitonality of searching different countries in the search bar. It incorporates using the actual geographical locations of the
+different sites. 
+
+To summarize this week, we have even more so worked as a team as many of us have worked together to finish different tasks. 
+Also I belive that I have understood the importance of working agile. It was a good project and the project in of itself has given
+me an insight in how it is to work agile to recieve a finished product in the end. It was also a good experience to teach one self
+Javascript and React as they are the language and framework that are used most extensively in web development. 

@@ -1,0 +1,18 @@
+.current-filter {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 55px;
+  right: 0;
+  width: 230px;
+  max-height: 40px;
+  background-color: var(--mainDark);
+  border-radius: 0 0 0 0.5em;
+  z-index: 1;
+}
+.text {
+  color: white;
+  margin: 0 20px 0 10px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
