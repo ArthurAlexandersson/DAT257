@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { searchContext } from "../../App";
+import "./searchBar.css";
 
 const SearchBar = () => {
   const { locationState, setLocationState } = useContext(searchContext);
@@ -32,7 +33,7 @@ const SearchBar = () => {
 
         <button
           type="button"
-          class="btn btn-outline-secondary  "
+          className="btn btn-outline-light"
           id="btnSearch"
           onClick={handleClick}
         >
