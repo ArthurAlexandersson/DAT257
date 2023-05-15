@@ -1,4 +1,11 @@
-import React, { useEffect, useMemo, useContext, useState, useRef } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useContext,
+  useState,
+  useRef,
+  createContext,
+} from "react";
 import "./interactiveMap.css";
 import {
   GoogleMap,
@@ -21,6 +28,8 @@ import { filter } from "../filter/Filtering";
 import axios from "axios";
 import CurrentFiltering from "../filter/CurrentFiltering";
 
+export const prevZoomContext = createContext();
+
 const InteractiveMap = ({ eventData }) => {
   const { isDarkModeState } = useContext(darkModeContext);
   const { locationState } = useContext(searchContext);
@@ -35,6 +44,7 @@ const InteractiveMap = ({ eventData }) => {
   const [filteredRegion, setFilteredRegion] = useState("Whole world");
   const [searchBounds, setsearchBounds] = useState(["", "", "", ""]);
   const [zoom, setzoom] = useState(12);
+  const [prevZoom, setPrevZoom] = useState(zoom);
 
   const mapRef = useRef(null);
 
@@ -203,11 +213,13 @@ const InteractiveMap = ({ eventData }) => {
           }}
           mapContainerClassName="map_container"
         >
-          {fireMarkers}
-          <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
-          {selectedEvent && (
-            <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
-          )}
+          <prevZoomContext.Provider value={{ prevZoom, setPrevZoom }}>
+            {fireMarkers}
+            <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
+            {selectedEvent && (
+              <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
+            )}
+          </prevZoomContext.Provider>
           <CurrentFiltering
             year={filteredYear}
             month={filteredMonth}
