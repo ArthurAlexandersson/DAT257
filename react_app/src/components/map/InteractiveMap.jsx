@@ -123,6 +123,7 @@ const InteractiveMap = ({ eventData }) => {
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    language: "en",
   });
 
   const [center, setCenter] = useState({ lat: 57.9, lng: 12.5 });
