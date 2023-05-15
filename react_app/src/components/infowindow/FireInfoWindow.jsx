@@ -48,9 +48,6 @@ const FireInfoWindow = ({ event, onClose }) => {
     onClose();
   };
 
-  // Possible to get country/the closest city or something from coordinates passed? Title no longer in our data
-  const title = "Wildfire somewhere in the world";
-
   return (
     <InfoWindow position={position} onCloseClick={() => onCloseClick()}>
       <div className="info-window">
@@ -69,36 +66,6 @@ const FireInfoWindow = ({ event, onClose }) => {
       </div>
     </InfoWindow>
   );
-  /*
-  return (
-      <div className="info-container">
-          <button className="close-button" onClick={handleClose}>
-            {" "}
-          </button>
-          <div className="info-content">
-            <div className="info-title">{title}</div>
-            <div className="info-coordinates">
-              <p className="coordinates">Coordinates:</p>
-              {` ${lat}, ${lng}`}
-            </div>
-            <div className="info">
-              <p className="date">Date:</p>
-              {` ${acq_date}`}
-              <br />
-              <br />
-              <p className="brightness">Brightness:</p>
-              {` ${brightness}`}
-              <br />
-              <br />
-              <p className="frp">Fire Radiative Power (FRP):</p>
-              {` ${frp}`}
-            </div>
-
-            <div className="info-"></div>
-          </div>
-        </div>
-      );
-*/
 };
 
 export default FireInfoWindow;
