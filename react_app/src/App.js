@@ -1,9 +1,8 @@
-import { useState, createContext } from "react";
+import {createContext, useState} from "react";
 import "./App.css";
 import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
 import ErrorPage from "./pages/errorPage";
