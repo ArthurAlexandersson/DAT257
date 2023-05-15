@@ -43,8 +43,9 @@ const InteractiveMap = ({ eventData }) => {
   const [filteredMonth, setFilteredMonth] = useState("01");
   const [filteredRegion, setFilteredRegion] = useState("Whole world");
   const [searchBounds, setsearchBounds] = useState(["", "", "", ""]);
-  const [zoom, setzoom] = useState(12);
   const [prevZoom, setPrevZoom] = useState(zoom);
+
+  const zoom = 12;
 
   const mapRef = useRef(null);
 
