@@ -11,12 +11,6 @@ function Home(){
     useEffect(() => {
         const fetchEvents = async () => {
             setLoadingData(true);
-            /*
-            const res = await fetch("https://eonet.gsfc.nasa.gov/api/v2.1/events");
-            const { events } = await res.json();
-            */
-
-            /* setEventData(events); */
             let filteredData = fireData.filter(obj => obj.acq_date.includes("-01-"));
             setEventData(filteredData);
             console.log(filteredData.length)

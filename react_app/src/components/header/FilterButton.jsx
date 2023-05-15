@@ -6,7 +6,6 @@ import "./header.css";
 const FilterButton = () => {
   const { filterShown, setFilterShown, setLeaderboardShown } =
     useContext(headerContext);
-  const [filterToggled, setFilterToggled] = useState(false);
 
   const { cx1, cx2 } = useSpring({
     cx1: filterShown ? 8.5 : 15,
