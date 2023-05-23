@@ -72,7 +72,7 @@ const Leaderboard = React.memo(({ data, handleCenterChange, toggleInfo }) => {
 
   return (
     <div className="leaderboard">
-      <h2>Leaderboard</h2>
+      <h2>Largest Fires</h2>
       {divs}
     </div>
   );

@@ -138,11 +138,6 @@ const InteractiveMap = ({ eventData }) => {
 
   const [center, setCenter] = useState({ lat: 57.9, lng: 12.5 });
 
-  const hermansHus = useMemo(
-    () => ({ lat: 57.8849039096269, lng: 12.473770972272334 }),
-    []
-  );
-
   const OPTIONS = {
     minZoom: 4,
     maxZoom: 80,
@@ -216,7 +211,6 @@ const InteractiveMap = ({ eventData }) => {
         >
           <prevZoomContext.Provider value={{ prevZoom, setPrevZoom }}>
             {fireMarkers}
-            <MarkerF position={hermansHus} label={"Hermans Hus! :D"}></MarkerF>
             {selectedEvent && (
               <FireInfoWindow event={selectedEvent} onClose={closeInfo} />
             )}

@@ -7,7 +7,7 @@ import dropDownYear from "./YearValues";
 
 const FilterWindow = ({
   filterData,
-  handleCenterChange,
+  /*   handleCenterChange, */
   filteredYear,
   setFilteredYear,
   filteredMonth,
@@ -35,9 +35,8 @@ const FilterWindow = ({
     setRegion(newRegion.value);
     setFilteredRegion(newRegion.value);
     filterData(year, month, newRegion.value);
-    updateCenter();
   };
-  const updateCenter = () => {
+  /*  const updateCenter = () => {
     let lat = parseFloat(
       dropDownRegion.find((option) => option.value === region).lat
     );
@@ -45,7 +44,7 @@ const FilterWindow = ({
       dropDownRegion.find((option) => option.value === region).lng
     );
     handleCenterChange({ lat: lat, lng: lng });
-  };
+  }; */
 
   return (
     <div className="filter">
