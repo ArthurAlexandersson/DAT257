@@ -51,11 +51,11 @@ const FireInfoWindow = ({ event, onClose }) => {
   return (
     <InfoWindow position={position} onCloseClick={() => onCloseClick()}>
       <div className="info-window">
-        <text className="coordinates">Cooridnates: </text>
+        <text className="coordinates">Coordinates: </text>
         <text className="info-coordinates">{`  ${lat}, ${lng}`}</text>
         <br />
         <br />
-        <text className="date">Acquried date: </text>
+        <text className="date">Acquired date: </text>
         {`  ${acq_date}`}
         <br />
         <text className="brightness">Brightness: </text>
