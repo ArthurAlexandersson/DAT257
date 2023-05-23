@@ -7,7 +7,7 @@ Pettersson Benjamin, Gille Gustav, Norén Herman
 In order to run the project you'll need to do the following steps:
 * Clone or download github repo.
 * Make sure you have node installed.
- * https://nodejs.org/en 
+  * https://nodejs.org/en 
 * Redirect to react_app in terminal 
   * ```cd react_app```
 * Install necessary modules
